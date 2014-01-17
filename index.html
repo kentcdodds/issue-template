@@ -1,0 +1,24 @@
+<!doctype html>
+<html ng-app="it">
+<head>
+  <title>Issue Template</title>
+  <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.9/angular.min.js"></script>
+</head>
+  <body>
+  <div ng-controller="LoginCtrl">
+    <a href="#" ng-hide="loginObj.user" ng-click="login()">Login</a>
+    <span ng-show="loginObj.user">
+      {{loginObj.user.name}} | <a href="#" ng-click="loginObj.$logout()">Logout</a>
+      <a href="#/new-template">New Template</a>
+      <a href="#/kentcdodds/issue-template/template">Submit issue</a>
+    </span>
+  </div>
+  <div ng-view></div>
+  <script src="https://cdn.firebase.com/v0/firebase.js"></script>
+  <script src="https://cdn.firebase.com/libs/angularfire/0.6.0/angularfire.min.js"></script>
+  <script src="https://cdn.firebase.com/js/simple-login/1.2.0/firebase-simple-login.js"></script>
+  <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.9/angular-route.js"></script>
+  <script src="./app.js"></script>
+  </body>
+</html>
