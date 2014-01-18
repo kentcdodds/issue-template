@@ -1,5 +1,5 @@
 <div>
-  <form role="form">
+  <form role="form" ng-hide="templateUrl">
     <div class="form-group">
       <label for="project-owner">Project Owner</label>
       <input type="text" class="form-control" id="project-owner" placeholder="ex. angular" ng-model="template.owner">
@@ -15,6 +15,7 @@
     <div ng-repeat="field in template.fields">
       <hr />
       <h4>Field {{$index + 1}}</h4>
+      <button class="btn btn-danger" ng-click="removeField($index)">Remove Field</button>
       <div class="form-fields">
         <div class="form-group">
           <label for="field-{{$index}}-name">Name</label>
@@ -41,4 +42,9 @@
     </div>
     <button type="submit" class="btn btn-primary pull-right" ng-click="submitTemplate()">Submit</button>
   </form>
+  <div ng-show="templateUrl">
+    <div class="alert alert-success">Successfully created a template: <a ng-href="{{templateUrl}}">{{templateUrl}}</a></div>
+    <div><a ng-click="issueUrl=''" class="cursor-pointer">Create New Template</a></div>
+    <div><a ng-href="{{templateUrl}}/edit">Edit Template</a></div>
+  </div>
 </div>

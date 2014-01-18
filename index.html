@@ -3,17 +3,18 @@
 <head>
   <title>Issue Template</title>
   <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css">
-  <link rel="stylesheet" href="./styles.css">
+  <link rel="stylesheet" href="./app/styles.css">
   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.9/angular.min.js"></script>
 </head>
   <body class="center-block">
   <h1>Issue Templates</h1>
   <div ng-controller="LoginCtrl">
+    <a href="#">Back Home</a><br />
     <a href="#" ng-if="!loginObj.user" ng-click="login()">Login</a>
     <span ng-if="loginObj.user">
       {{loginObj.user.name}} | <a href="#" ng-click="loginObj.$logout()">Logout</a><br />
       <a href="#/new-template">New Template</a><br />
-      <a href="#/kentcdodds/issue-template/template">Test Submit issue</a><br />
+      <a href="#/search-projects">Search Projects</a><br />
     </span>
   </div>
   <div ng-view></div>
@@ -21,6 +22,17 @@
   <script src="https://cdn.firebase.com/libs/angularfire/0.6.0/angularfire.min.js"></script>
   <script src="https://cdn.firebase.com/js/simple-login/1.2.0/firebase-simple-login.js"></script>
   <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.9/angular-route.js"></script>
-  <script src="./app.js"></script>
-  </body>
+
+  <script src="./app/app.js"></script>
+  <script src="./app/login/LoginCtrl.js"></script>
+  <script src="./app/login/LoginService.js"></script>
+  <script src="./app/home/HomeCtrl.js"></script>
+  <script src="./app/new-issue/NewIssueCtrl.js"></script>
+  <script src="./app/templates/NewTemplateCtrl.js"></script>
+  <script src="./app/templates/EditTemplateCtrl.js"></script>
+  <script src="./app/services/TemplateService.js"></script>
+  <script src="./app/services/ProjectService.js"></script>
+  <script src="./app/search/SearchProjectsCtrl.js"></script>
+  <script src="./app/search/SearchTemplatesCtrl.js"></script>
+</body>
 </html>

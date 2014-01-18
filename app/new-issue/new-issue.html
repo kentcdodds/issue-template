@@ -1,0 +1,55 @@
+<div>
+  <div ng-hide="issueUrl">
+    <form role="form">
+      <div class="form-group">
+        <label for="issue-title">Issue Title</label>
+        <input type="text" class="form-control" id="issue-title" ng-model="issue.title">
+      </div>
+      <div ng-repeat="field in issue.fields">
+        <div class="form-group">
+          <label for="field-{{$index}}">{{field.name}}</label>
+          <div ng-switch on="field.element">
+            <div ng-switch-when="input">
+              <div ng-switch on="field.type">
+
+                <div ng-switch-when="radio">
+                  <div class="radio" ng-repeat="value in field.values">
+                    <label>
+                      <input type="radio" name="radio-{{$index}}" id="field-{{$parent.$index}}-radio-{{$index}}" value="{{value}}">
+                      {{value}}
+                    </label>
+                  </div>
+                </div>
+
+                <div ng-switch-when="checkbox">
+                  <div class="checkbox" ng-repeat="value in field.values">
+                    <label>
+                      <input type="checkbox" value="{{value}}">
+                      {{value}}
+                    </label>
+                  </div>
+                </div>
+
+                <input ng-switch-default type="{{field.type}}" class="form-control" id="field-{{$index}}" ng-model="field.value" value="{{values.join(',')}}">
+              </div>
+            </div>
+
+            <textarea ng-switch-when="textarea" class="form-control" id="field-{{$index}}" ng-model="field.value"></textarea>
+            <select ng-switch-when="select" class="form-fields" id="field-{{$index}}" ng-model="field.value">
+              <option ng-repeat="value in field.values">{{value}}</option>
+            </select>
+          </div>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="issue-comments">Other Comments</label>
+        <textarea type="text" class="form-control" id="issue-comments" ng-model="issue.comments"></textarea>
+      </div>
+      <button class="btn btn-default" ng-click="submitIssue()">Submit Test Issue</button>
+    </form>
+  </div>
+  <div ng-show="issueUrl">
+    <div class="alert alert-success">Successfully created an issue: <a ng-href="{{issueUrl}}">{{issueUrl}}</a></div>
+    <div><a ng-click="issueUrl=''" class="cursor-pointer">Create New Issue</a></div>
+  </div>
+</div>
