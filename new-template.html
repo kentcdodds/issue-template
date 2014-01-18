@@ -1,0 +1,44 @@
+<div>
+  <form role="form">
+    <div class="form-group">
+      <label for="project-owner">Project Owner</label>
+      <input type="text" class="form-control" id="project-owner" placeholder="ex. angular" ng-model="template.owner">
+    </div>
+    <div class="form-group">
+      <label for="project-name">Project Name</label>
+      <input type="text" class="form-control" id="project-name" placeholder="ex. angular.js" ng-model="template.repo">
+    </div>
+    <div class="form-group">
+      <label for="template-name">Template Name</label>
+      <input type="text" class="form-control" id="template-name" placeholder="ex. documentation" ng-model="template.name">
+    </div>
+    <div ng-repeat="field in template.fields">
+      <hr />
+      <h4>Field {{$index + 1}}</h4>
+      <div class="form-fields">
+        <div class="form-group">
+          <label for="field-{{$index}}-name">Name</label>
+          <input type="text" class="form-control" id="field-{{$index}}-name" placeholder="ex. feature" ng-model="field.name">
+        </div>
+        <div class="form-group">
+          <label for="field-{{$index}}-element">Element</label>
+          <input type="text" class="form-control" id="field-{{$index}}-element" placeholder="ex. input/textarea/select/etc." ng-model="field.element">
+        </div>
+        <div class="form-group">
+          <label for="field-{{$index}}-type">Element Type</label>
+          <input type="text" class="form-control" id="field-{{$index}}-type" placeholder="ex. text/email/url/checkbox/etc." ng-model="field.type">
+        </div>
+        <div class="form-group">
+          <label for="field-{{$index}}-values">Value(s)</label>
+          <input type="text" class="form-control" id="field-{{$index}}-values" placeholder="ex. value1,value2,value3" ng-model="field.values">
+        </div>
+      </div>
+    </div>
+    <button class="btn btn-success" ng-click="template.fields.push({})">Add Field</button>
+    <div class="form-group">
+      <label for="template-template">Template... er... Template</label>
+      <textarea class="form-control" id="template-template" placeholder="ex. see README" ng-model="template.template" ng-model="template.template"></textarea>
+    </div>
+    <button type="submit" class="btn btn-primary pull-right" ng-click="submitTemplate()">Submit</button>
+  </form>
+</div>
