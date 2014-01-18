@@ -35,7 +35,7 @@
             </div>
 
             <textarea ng-switch-when="textarea" class="form-control" id="field-{{$index}}" ng-model="field.value"></textarea>
-            <select ng-switch-when="select" class="form-fields" id="field-{{$index}}" ng-model="field.value">
+            <select ng-switch-when="select" class="form-field" id="field-{{$index}}" ng-model="field.value">
               <option ng-repeat="value in field.values">{{value}}</option>
             </select>
           </div>
@@ -45,7 +45,8 @@
         <label for="issue-comments">Other Comments</label>
         <textarea type="text" class="form-control" id="issue-comments" ng-model="issue.comments"></textarea>
       </div>
-      <button class="btn btn-default" ng-click="submitIssue()">Submit Test Issue</button>
+      <button ng-if="!user" class="btn btn-warning" ng-click="login()">Login to Submit</button>
+      <button ng-if="user" class="btn btn-default" ng-click="submitIssue()">Submit Issue</button>
     </form>
   </div>
   <div ng-show="issueUrl">
