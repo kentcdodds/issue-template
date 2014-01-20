@@ -12,7 +12,45 @@
       })
       .when('/new-template', {
         templateUrl: './app/templates/template.html',
-        controller: 'NewTemplateCtrl'
+        controller: 'TemplateCtrl',
+        resolve: {
+          template: function() {
+            return {
+              name: '',
+              owner: '',
+              repo: '',
+              template: '',
+              fields: [
+                {
+                  name: '',
+                  element: '',
+                  type: '',
+                  value: ''
+                }
+              ]
+            }
+          },
+          mode: function() {
+            return 'new';
+          }
+        }
+      })
+      .when('/:owner/:repo/:name/edit', {
+        templateUrl: './app/templates/template.html',
+        controller: 'TemplateCtrl',
+        resolve: {
+          template: function($q, util, TemplateService, $route) {
+            var routeParams = $route.current.params;
+            return util.getDataSnapshot($q, TemplateService, TemplateService.getTemplate, {
+              name: routeParams.name,
+              owner: routeParams.owner,
+              repo: routeParams.repo
+            });
+          },
+          mode: function() {
+            return 'edit';
+          }
+        }
       })
       .when('/search', {
         templateUrl: './app/search/search-templates.html',
@@ -30,20 +68,6 @@
           fields: function($q, util, TemplateService, $route) {
             var routeParams = $route.current.params;
             return util.getDataSnapshot($q, TemplateService, TemplateService.getTemplateFields, {
-              name: routeParams.name,
-              owner: routeParams.owner,
-              repo: routeParams.repo
-            });
-          }
-        }
-      })
-      .when('/:owner/:repo/:name/edit', {
-        templateUrl: './app/templates/template.html',
-        controller: 'EditTemplateCtrl',
-        resolve: {
-          template: function($q, util, TemplateService, $route) {
-            var routeParams = $route.current.params;
-            return util.getDataSnapshot($q, TemplateService, TemplateService.getTemplate, {
               name: routeParams.name,
               owner: routeParams.owner,
               repo: routeParams.repo

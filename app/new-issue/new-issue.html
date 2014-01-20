@@ -1,5 +1,5 @@
 <div>
-  <div ng-hide="issueUrl">
+  <div ng-show="!issueUrl && template">
     <form role="form">
       <div class="form-group">
         <label for="issue-title">Issue Title</label>
@@ -13,7 +13,7 @@
               <div ng-switch on="field.type">
 
                 <div ng-switch-when="radio">
-                  <div class="radio" ng-repeat="value in field.values">
+                  <div class="radio" ng-repeat="value in field.value | split">
                     <label>
                       <input type="radio" name="radio-{{$index}}" id="field-{{$parent.$index}}-radio-{{$index}}" value="{{value}}">
                       {{value}}
@@ -22,7 +22,7 @@
                 </div>
 
                 <div ng-switch-when="checkbox">
-                  <div class="checkbox" ng-repeat="value in field.values">
+                  <div class="checkbox" ng-repeat="value in field.value | split">
                     <label>
                       <input type="checkbox" value="{{value}}">
                       {{value}}
@@ -30,13 +30,13 @@
                   </div>
                 </div>
 
-                <input ng-switch-default type="{{field.type}}" class="form-control" id="field-{{$index}}" ng-model="field.value" value="{{values.join(',')}}">
+                <input ng-switch-default type="{{field.type}}" class="form-control" id="field-{{$index}}" ng-model="field.value">
               </div>
             </div>
 
             <textarea ng-switch-when="textarea" class="form-control" id="field-{{$index}}" ng-model="field.value"></textarea>
             <select ng-switch-when="select" class="form-field" id="field-{{$index}}" ng-model="field.value">
-              <option ng-repeat="value in field.values">{{value}}</option>
+              <option ng-repeat="value in field.value | split">{{value}}</option>
             </select>
           </div>
         </div>
@@ -52,5 +52,9 @@
   <div ng-show="issueUrl">
     <div class="alert alert-success">Successfully created an issue: <a ng-href="{{issueUrl}}">{{issueUrl}}</a></div>
     <div><a ng-click="issueUrl=''" class="cursor-pointer">Create New Issue</a></div>
+  </div>
+  <div ng-show="!template">
+    <h1>Uh oh...</h1>
+    Looks like there's no template here. <a href="#/search">Search for templates</a>.
   </div>
 </div>
