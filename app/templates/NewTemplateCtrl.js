@@ -66,33 +66,35 @@ angular.module('it').controller('NewTemplateCtrl', function($scope, TemplateServ
     return '#/' + owner + '/' + project + '/' + name;
   }
 
+  function getFields(fields) {
+    var theFields = [];
+    for (var i = 0; i < fields.length; i++) {
+      var field = fields[i];
+      var values = '';
+      if (field.values) {
+        values = field.values.split(',');
+      }
+
+      theFields.push({
+        name: field.name,
+        element: field.element,
+        type: field.type,
+        values: values
+      });
+    }
+    return theFields;
+  }
+
   $scope.submitTemplate = function() {
     var template = {
       name: $scope.template.name,
       owner: $scope.template.owner,
       repo: $scope.template.repo,
       template: $scope.template.template,
-      fields: (function() {
-        var fields = [];
-        for (var i = 0; i < $scope.template.fields.length; i++) {
-          var field = $scope.template.fields[i];
-          var values = '';
-          if (field.values) {
-            values = field.values.split(',');
-          }
-
-          fields.push({
-            name: field.name,
-            element: field.element,
-            type: field.type,
-            values: values
-          });
-        }
-        return fields;
-      })()
+      createdBy: $scope.user,
+      fields: getFields($scope.template.fields)
     };
     TemplateService.addTemplate(template);
-    ProjectService.addProjectTemplate(template);
     $scope.templateUrl = getTemplateUrl();
   };
 

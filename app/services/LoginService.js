@@ -1,10 +1,16 @@
 angular.module('it').factory('LoginService', function(Firebase, $firebaseSimpleLogin, $rootScope) {
   var firebaseRef = new Firebase('https://issue-template.firebaseio.com');
   var loginObj = $firebaseSimpleLogin(firebaseRef);
-  $rootScope.$watch(function() {
+  var firstWatchExecuted = false;
+  var tempWatch = $rootScope.$watch(function() {
     return loginObj.user;
   }, function(user) {
-    broadcastStateChange(user);
+    if (firstWatchExecuted) {
+      broadcastStateChange(user);
+      tempWatch();
+    } else {
+      firstWatchExecuted = true;
+    }
   });
 
   function broadcastStateChange(user) {
@@ -16,18 +22,19 @@ angular.module('it').factory('LoginService', function(Firebase, $firebaseSimpleL
       loginObj.$logout();
       broadcastStateChange();
     },
-    login: function() {
+    login: function(rememberMe) {
       loginObj.$login('github', {
-        scope: 'user,repo'
+        scope: 'user,repo',
+        rememberMe: rememberMe
       }).then(function(user) {
-          // The watch will broadcast this.
+          broadcastStateChange(user);
         }, function(error) {
           console.error('Login failed: ', error);
           //TODO Handle this.
         });
     },
     getUser: function() {
-      return loginObj.user;
+      return loginObj.$getCurrentUser();
     }
   }
 });

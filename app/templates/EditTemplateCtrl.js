@@ -1,9 +1,7 @@
-angular.module('it').controller('EditTemplateCtrl', function($scope, TemplateService, $routeParams) {
-  $scope.template = TemplateService.getTemplate({
-    name: $routeParams.name,
-    owner: $routeParams.owner,
-    repo: $routeParams.repo
-  });
-
+angular.module('it').controller('EditTemplateCtrl', function($scope, template) {
+  $scope.template = template;
   $scope.templateUrl = '';
+  $scope.submitTemplate = function() {
+    console.log('not yet supported');
+  }
 });

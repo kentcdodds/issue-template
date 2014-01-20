@@ -5,12 +5,6 @@ angular.module('it').controller('NewIssueCtrl', function($scope, GitHubService, 
     fields: fields
   };
 
-  $scope.user = LoginService.getUser();
-
-  $scope.$on('userStateChanged', function(event, user) {
-    $scope.user = user;
-  });
-
   function getBody() {
     var template = $scope.template.template.replace(/\{\{field(\d)\}\}/g, function(match, fieldNum) {
       if ($scope.issue.fields[fieldNum]) {

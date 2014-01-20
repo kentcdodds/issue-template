@@ -2,6 +2,7 @@
   var app = angular.module('it', ['ngRoute', 'firebase']);
 
   app.constant('Firebase', Firebase);
+  app.constant('_', _);
 
   app.config(function($routeProvider) {
     $routeProvider
@@ -13,35 +14,42 @@
         templateUrl: './app/templates/template.html',
         controller: 'NewTemplateCtrl'
       })
-      .when('/search-projects', {
-        templateUrl: './app/search/search-projects.html',
-        controller: 'SearchProjectsCtrl'
-      })
-      .when('/:owner/:project', {
+      .when('/search', {
         templateUrl: './app/search/search-templates.html',
-        controller: 'SearchTemplatesCtrl'
+        controller: 'SearchTemplatesCtrl',
+        resolve: {
+          owners: function($q, util, TemplateService) {
+            return util.getDataSnapshot($q, TemplateService, TemplateService.getAllTemplates);
+          }
+        }
       })
       .when('/:owner/:repo/:name', {
         templateUrl: './app/new-issue/new-issue.html',
         controller: 'NewIssueCtrl',
         resolve: {
-          fields: function($q, TemplateService, $route) {
-            var deferred = $q.defer();
+          fields: function($q, util, TemplateService, $route) {
             var routeParams = $route.current.params;
-            TemplateService.getTemplateFields({
+            return util.getDataSnapshot($q, TemplateService, TemplateService.getTemplateFields, {
               name: routeParams.name,
               owner: routeParams.owner,
               repo: routeParams.repo
-            }).once('value', function(snapshot) {
-                deferred.resolve(snapshot.val());
-              });
-            return deferred.promise;
+            });
           }
         }
       })
       .when('/:owner/:repo/:name/edit', {
         templateUrl: './app/templates/template.html',
-        controller: 'EditTemplateCtrl'
+        controller: 'EditTemplateCtrl',
+        resolve: {
+          template: function($q, util, TemplateService, $route) {
+            var routeParams = $route.current.params;
+            return util.getDataSnapshot($q, TemplateService, TemplateService.getTemplate, {
+              name: routeParams.name,
+              owner: routeParams.owner,
+              repo: routeParams.repo
+            });
+          }
+        }
       })
       .otherwise('/');
   });

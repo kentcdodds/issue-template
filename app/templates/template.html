@@ -40,7 +40,10 @@
       <label for="template-template">Template... er... Template</label>
       <textarea class="form-control" id="template-template" placeholder="ex. see README" ng-model="template.template" ng-model="template.template"></textarea>
     </div>
-    <button type="submit" class="btn btn-primary pull-right" ng-click="submitTemplate()">Submit</button>
+    <div class="pull-right">
+      <button ng-if="!user" class="btn btn-warning" ng-click="login()">Login to Submit</button>
+      <button ng-if="user" type="submit" class="btn btn-primary" ng-click="submitTemplate()">Submit</button>
+    </div>
   </form>
   <div ng-show="templateUrl">
     <div class="alert alert-success">Successfully created a template: <a ng-href="{{templateUrl}}">{{templateUrl}}</a></div>
