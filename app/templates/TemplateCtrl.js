@@ -1,4 +1,4 @@
-angular.module('it').controller('TemplateCtrl', function($scope, $location, TemplateService, template, mode) {
+angular.module('it').controller('TemplateCtrl', function($scope, $location, util, TemplateService, template, mode) {
   $scope.template = template;
   $scope.mode = mode;
 
@@ -67,17 +67,10 @@ angular.module('it').controller('TemplateCtrl', function($scope, $location, Temp
     $scope.template.fields.splice(index, 1);
   };
 
-  function getTemplateUrl() {
-    var owner = $scope.template.owner;
-    var project = $scope.template.repo;
-    var name = $scope.template.name;
-    return owner + '/' + project + '/' + name;
-  }
-
   $scope.submitTemplate = function() {
     $scope.template.createdBy = $scope.user.login;
     TemplateService.saveTemplate(JSON.parse(angular.toJson($scope.template)));
-    $scope.templateUrl = '#/' + getTemplateUrl();
+    $scope.templateUrl = util.simpleCompile('#/:owner/:repo/:name', $scope.template);
   };
 
 });
