@@ -1,4 +1,5 @@
-angular.module('it').controller('NewIssueCtrl', function($scope, GitHubService, LoginService, fields) {
+angular.module('it').controller('NewIssueCtrl', function($scope, util, GitHubService, LoginService, fields, template) {
+  $scope.template = template;
   $scope.issue = {
     title: '',
     comments: '',
@@ -6,13 +7,7 @@ angular.module('it').controller('NewIssueCtrl', function($scope, GitHubService, 
   };
 
   function getBody() {
-    var template = $scope.template.template.replace(/\{\{field(\d)\}\}/g, function(match, fieldNum) {
-      if ($scope.issue.fields[fieldNum]) {
-        return $scope.issue.fields[fieldNum].value;
-      } else {
-        return match;
-      }
-    });
+    var template = util.simpleCompile($scope.template.template, $scope.issue.fields, /{{field(\d)}}/g);
     return template + '\n\n' + $scope.issue.comments;
   }
 

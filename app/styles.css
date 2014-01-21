@@ -3,6 +3,14 @@ body {
   margin: 50px 0 150px 0;
 }
 
+#improve-me {
+  position: absolute;
+  top: 0;
+  right: 0;
+  border: 0;
+  max-width: 170px;
+}
+
 .form-fields {
   margin-left:20px;
 }

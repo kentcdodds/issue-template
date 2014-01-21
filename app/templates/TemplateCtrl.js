@@ -2,6 +2,12 @@ angular.module('it').controller('TemplateCtrl', function($scope, $location, Temp
   $scope.template = template;
   $scope.mode = mode;
 
+  if ($scope.mode === 'copy') {
+    $scope.template.name = '';
+  }
+
+  $scope.titlePlaceholder = 'ex. Feature: {{title}}';
+
   (function(preload) {
     if (!preload || $scope.template) {
       return;
@@ -41,11 +47,20 @@ angular.module('it').controller('TemplateCtrl', function($scope, $location, Temp
         }
       ]
     };
-  })(true);
+  })(false);
 
   $scope.deleteTemplate = function() {
     TemplateService.deleteTemplate($scope.template);
     $location.path('/');
+  };
+
+  $scope.copyTemplate = function() {
+    $location.path('/new-template').search({
+      copy: true,
+      owner: $scope.template.owner,
+      repo: $scope.template.repo,
+      name: $scope.template.name
+    });
   };
 
   $scope.removeField = function(index) {
@@ -56,13 +71,13 @@ angular.module('it').controller('TemplateCtrl', function($scope, $location, Temp
     var owner = $scope.template.owner;
     var project = $scope.template.repo;
     var name = $scope.template.name;
-    return '#/' + owner + '/' + project + '/' + name;
+    return owner + '/' + project + '/' + name;
   }
 
   $scope.submitTemplate = function() {
     $scope.template.createdBy = $scope.user.login;
     TemplateService.saveTemplate(JSON.parse(angular.toJson($scope.template)));
-    $scope.templateUrl = getTemplateUrl();
+    $scope.templateUrl = '#/' + getTemplateUrl();
   };
 
 });

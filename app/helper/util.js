@@ -10,6 +10,15 @@ angular.module('it').constant('util', (function() {
         deferred.resolve(snapshot.val());
       });
       return deferred.promise;
+    },
+    simpleCompile: function(string, obj, regex) {
+      return string.replace(regex || /{{(.)}}/g, function(match, propName) {
+        if (obj[propName]) {
+          return obj[propName];
+        } else {
+          return match;
+        }
+      });
     }
   }
 })());

@@ -45,8 +45,8 @@
         <label for="issue-comments">Other Comments</label>
         <textarea type="text" class="form-control" id="issue-comments" ng-model="issue.comments"></textarea>
       </div>
-      <button ng-if="!user" class="btn btn-warning" ng-click="login()">Login to Submit</button>
-      <button ng-if="user" class="btn btn-default" ng-click="submitIssue()">Submit Issue</button>
+      <button ng-if="!user" class="btn btn-warning pull-right" ng-click="login()">Login to Submit</button>
+      <button ng-if="user" class="btn btn-primary pull-right" ng-click="submitIssue()">Submit Issue</button>
     </form>
   </div>
   <div ng-show="issueUrl">
