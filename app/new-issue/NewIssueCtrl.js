@@ -17,6 +17,17 @@ angular.module('it').controller('NewIssueCtrl', function($scope, util, GitHubSer
       case 'select':
         field.enteredValue = field.value.split(',')[0];
         break;
+      case 'input':
+        switch (field.type) {
+          case 'checkbox':
+            field.selectedValues = [];
+          case 'radio':
+            field.enteredValue = field.value.split(',')[0];;
+            break;
+          default:
+            field.enteredValue = field.value;
+        }
+        break;
       default:
         field.enteredValue = field.value;
     }
@@ -38,12 +49,20 @@ angular.module('it').controller('NewIssueCtrl', function($scope, util, GitHubSer
 
   function compileTitle(string) {
     return util.simpleCompile(string, {
-      title: $scope.issue.title
+      title: $scope.issue.title || ' '
     });
   }
 
   function compileTemplate(string) {
-    return util.simpleCompile(string, $scope.issue.fields, /{{field(\d)}}/g, 'enteredValue');
+    var cleanedFields = $scope.issue.fields;
+    _.each(cleanedFields, function(field) {
+      switch (field.type) {
+        case 'checkbox':
+          field.enteredValue = _.compact(field.selectedValues).join(', ');
+          break;
+      }
+    });
+    return util.simpleCompile(string, cleanedFields, /{{field(\d)}}/g, 'enteredValue');
   }
 
   function generateIssue() {

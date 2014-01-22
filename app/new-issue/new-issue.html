@@ -17,7 +17,7 @@
                 <div ng-switch-when="radio">
                   <div class="radio" ng-repeat="value in field.value | split">
                     <label>
-                      <input type="radio" name="radio-{{$index}}" id="field-{{$parent.$index}}-radio-{{$index}}" value="{{value}}">
+                      <input type="radio" value="{{value}}" ng-model="field.enteredValue" name="radio-field-{{$parent.$index}}">
                       {{value}}
                     </label>
                   </div>
@@ -26,7 +26,7 @@
                 <div ng-switch-when="checkbox">
                   <div class="checkbox" ng-repeat="value in field.value | split">
                     <label>
-                      <input type="checkbox" value="{{value}}">
+                      <input type="checkbox" ng-true-value="{{value}}" ng-model="field.selectedValues[$index]">
                       {{value}}
                     </label>
                   </div>
