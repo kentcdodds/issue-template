@@ -1,5 +1,5 @@
 (function() {
-  var app = angular.module('it', ['ngRoute', 'firebase']);
+  var app = angular.module('it', ['ngRoute', 'firebase', 'ga']);
 
   app.constant('Firebase', Firebase);
   app.constant('_', _);

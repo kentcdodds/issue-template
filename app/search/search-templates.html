@@ -3,6 +3,6 @@
   <input type="search" class="form-control" autofocus ng-model="search">
   <hr />
   <div ng-repeat="template in templates | filter:search">
-    <a ng-href="#/{{template.owner}}/{{template.repo}}/{{template.name}}">{{template.owner}}/{{template.repo}}/{{template.name}}</a>
+    <a ng-href="#/{{template.owner}}/{{template.repo}}/{{template.name}}" ga>{{template.owner}}/{{template.repo}}/{{template.name}}</a>
   </div>
 </div>

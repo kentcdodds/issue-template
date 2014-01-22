@@ -50,16 +50,16 @@
         <textarea class="form-control" id="template-template" placeholder="ex. see README" ng-model="template.template"></textarea>
       </div>
       <div class="pull-right">
-        <button type="submit" class="btn btn-primary" ng-disabled="!isCollaborator" ng-click="submitTemplate()">Submit</button>
+        <button type="submit" class="btn btn-primary" ng-disabled="!isCollaborator" ng-click="submitTemplate()" ga>Submit</button>
       </div>
     </form>
     <div ng-show="templateUrl">
-      <div class="alert alert-success">Successfully created a template: <a ng-href="{{templateUrl}}">{{templateUrl}}</a></div>
-      <div><a ng-href="#/new-template" ng-click="templateUrl=''" class="cursor-pointer">Create New Template</a></div>
-      <div><a ng-href="{{templateUrl}}/edit" ng-click="templateUrl=''">Edit Template</a></div>
+      <div class="alert alert-success">Successfully created a template: <a ng-href="{{templateUrl}}" ga>{{templateUrl}}</a></div>
+      <div><a ng-href="#/new-template" ng-click="templateUrl=''" class="cursor-pointer" ga>Create New Template</a></div>
+      <div><a ng-href="{{templateUrl}}/edit" ng-click="templateUrl=''" ga>Edit Template</a></div>
     </div>
   </div>
   <div ng-if="!user">
-    <button ng-if="!user" class="btn btn-warning" ng-click="login()">Login to Make a New Template</button>
+    <button ng-if="!user" class="btn btn-warning" ng-click="login()" ga>Login to Make a New Template</button>
   </div>
 </div>
