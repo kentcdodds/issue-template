@@ -1,4 +1,6 @@
 <div>
+  <h2>{{template.owner}}/{{template.repo}} <small>{{template.name}} issue template</small></h2>
+  <a ng-href="#/{{template.owner}}/{{template.repo}}/{{template.name}}/edit" ng-if="isCollaborator" class="btn btn-success">Edit Template</a>
   <div ng-show="!issueUrl && template">
     <form role="form">
       <div class="form-group">
@@ -30,12 +32,12 @@
                   </div>
                 </div>
 
-                <input ng-switch-default type="{{field.type}}" class="form-control" id="field-{{$index}}" ng-model="field.value">
+                <input ng-switch-default type="{{field.type}}" class="form-control" id="field-{{$index}}" ng-model="field.enteredValue">
               </div>
             </div>
 
-            <textarea ng-switch-when="textarea" class="form-control" id="field-{{$index}}" ng-model="field.value"></textarea>
-            <select ng-switch-when="select" class="form-field" id="field-{{$index}}" ng-model="field.value">
+            <textarea ng-switch-when="textarea" class="form-control" id="field-{{$index}}" ng-model="field.enteredValue"></textarea>
+            <select ng-switch-when="select" class="form-field" id="field-{{$index}}" ng-model="field.enteredValue">
               <option ng-repeat="value in field.value | split">{{value}}</option>
             </select>
           </div>
@@ -48,6 +50,19 @@
       <button ng-if="!user" class="btn btn-warning pull-right" ng-click="login()">Login to Submit</button>
       <button ng-if="user" class="btn btn-primary pull-right" ng-click="submitIssue()">Submit Issue</button>
     </form>
+    <div>
+      <h2>Preview</h2>
+      <div>
+        <h3>Title:</h3>
+        <div>
+          {{preview.title}}
+        </div>
+      </div>
+      <div>
+        <h3>Body:</h3>
+        <pre>{{preview.body}}</pre>
+      </div>
+    </div>
   </div>
   <div ng-show="issueUrl">
     <div class="alert alert-success">Successfully created an issue: <a ng-href="{{issueUrl}}">{{issueUrl}}</a></div>

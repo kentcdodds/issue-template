@@ -1,4 +1,4 @@
-angular.module('it').factory('GitHubService', function($http, util) {
+angular.module('it').factory('GitHubService', function($q, $http, util) {
   function convertUrl(url, obj) {
     return util.simpleCompile('https://api.github.com/' + url, obj);
   }
@@ -9,6 +9,24 @@ angular.module('it').factory('GitHubService', function($http, util) {
         method: 'GET',
         url: convertUrl('repos/{{owner}}/{{repo}}/issues/{{number}}', obj)
       });
+    },
+
+    checkUserIsCollaborator: function(owner, repo, user) {
+      var deferred = $q.defer();
+      var url = convertUrl('repos/{{owner}}/{{repo}}/collaborators/{{user}}', {
+        owner: owner,
+        repo: repo,
+        user: user
+      });
+      $http({
+        method: 'GET',
+        url: url
+      }).success(function() {
+        deferred.resolve(true);
+      }).error(function() {
+        deferred.resolve(false);
+      });
+      return deferred.promise;
     },
 
     submitIssue: function(issue, accessToken, project) {

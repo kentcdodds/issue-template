@@ -11,10 +11,14 @@ angular.module('it').constant('util', (function() {
       });
       return deferred.promise;
     },
-    simpleCompile: function(string, obj, regex) {
-      return string.replace(regex || /{{(.)}}/g, function(match, propName) {
+    simpleCompile: function(string, obj, regex, propToPull) {
+      return string.replace(regex || /{{(.*?)}}/g, function(match, propName) {
         if (obj[propName]) {
-          return obj[propName];
+          if (propToPull) {
+            return obj[propName][propToPull];
+          } else {
+            return obj[propName];
+          }
         } else {
           return match;
         }

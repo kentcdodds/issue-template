@@ -3,6 +3,7 @@
 
   app.constant('Firebase', Firebase);
   app.constant('_', _);
+  app.constant('toastr', toastr);
 
   function getTeplateInfo($q, util, service, fn, $route) {
     var routeParams = $route.current.params;
@@ -25,7 +26,9 @@
     }
   };
 
-  app.config(function($routeProvider) {
+  app.config(function($routeProvider, toastr) {
+    toastr.options.closeButton = true;
+
     $routeProvider
       .when('/', {
         templateUrl: './app/home/home.html',

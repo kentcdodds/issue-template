@@ -1,7 +1,7 @@
 <div>
   <div ng-if="user">
     <div ng-if="mode === 'edit'">
-      <button class="btn btn-danger" ng-click="deleteTemplate()">Delete Template</button>
+      <button class="btn btn-danger" ng-click="deleteTemplate()" ng-disabled="!isCollaborator">Delete Template</button>
       <button class="btn btn-info" ng-click="copyTemplate()">Copy Template</button>
     </div>
     <form role="form" ng-hide="templateUrl">
@@ -50,7 +50,7 @@
         <textarea class="form-control" id="template-template" placeholder="ex. see README" ng-model="template.template"></textarea>
       </div>
       <div class="pull-right">
-        <button type="submit" class="btn btn-primary" ng-click="submitTemplate()">Submit</button>
+        <button type="submit" class="btn btn-primary" ng-disabled="!isCollaborator" ng-click="submitTemplate()">Submit</button>
       </div>
     </form>
     <div ng-show="templateUrl">
