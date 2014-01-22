@@ -31,8 +31,11 @@
 
     $routeProvider
       .when('/', {
-        templateUrl: './app/home/home.html',
-        controller: 'HomeCtrl'
+        templateUrl: './app/search/search-templates.html',
+        controller: 'SearchTemplatesCtrl',
+        resolve: {
+          owners: resolve.allTemplates
+        }
       })
       .when('/new-template', {
         templateUrl: './app/templates/template.html',
@@ -80,13 +83,6 @@
           mode: function() {
             return 'edit';
           }
-        }
-      })
-      .when('/search', {
-        templateUrl: './app/search/search-templates.html',
-        controller: 'SearchTemplatesCtrl',
-        resolve: {
-          owners: resolve.allTemplates
         }
       })
       .when('/:owner/:repo/:name', {

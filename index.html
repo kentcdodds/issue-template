@@ -10,14 +10,14 @@
 <body class="center-block" ng-controller="MainCtrl">
   <a href="https://github.com/kentcdodds/issue-template"><img id="improve-me" src="./app/resources/improve.png" alt="Improve on GitHub"></a>
   <h1>Issue Templates</h1>
+  <a href="https://github.com/kentcdodds/issue-template">Help</a>
   <div class="ng-cloak">
-    <a href="#">Back Home</a><br />
     <div class="ng-cloak">
       <a href="#" ng-if="!user" ng-click="login()">Login</a>
       <span ng-if="user">
         {{user.name}} | <a href="#" ng-click="logout()">Logout</a><br />
         <a href="#/new-template">New Template</a><br />
-        <a href="#/search">Search Projects</a><br />
+        <a href="#">Search Templates</a><br />
       </span>
     </div>
   </div>
