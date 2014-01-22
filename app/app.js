@@ -94,7 +94,10 @@
         controller: 'NewIssueCtrl',
         resolve: {
           template: resolve.template,
-          fields: resolve.fields
+          fields: resolve.fields,
+          issue: function() {
+            return null;
+          }
         }
       })
       .when('/:owner/:repo/:name/:number', {
@@ -102,7 +105,15 @@
         controller: 'NewIssueCtrl',
         resolve: {
           template: resolve.template,
-          fields: resolve.fields
+          fields: resolve.fields,
+          issue: function(GitHubService, $route) {
+            var routeParams = $route.current.params;
+            return GitHubService.getIssue({
+              owner: routeParams.owner,
+              repo: routeParams.repo,
+              number: routeParams.number
+            });
+          }
         }
       })
       .otherwise('/');

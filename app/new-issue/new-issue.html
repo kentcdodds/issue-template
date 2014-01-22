@@ -1,7 +1,7 @@
 <div>
   <h2>{{template.owner}}/{{template.repo}} <small>{{template.name}} issue template</small></h2>
   <a ng-href="#/{{template.owner}}/{{template.repo}}/{{template.name}}/edit" ng-if="isCollaborator" class="btn btn-success">Edit Template</a>
-  <div ng-show="!issueUrl && template">
+  <div ng-show="!issueSubmitted && template">
     <form role="form">
       <div class="form-group">
         <label for="issue-title">Issue Title</label>
@@ -47,8 +47,8 @@
         <label for="issue-comments">Other Comments</label>
         <textarea type="text" class="form-control" id="issue-comments" ng-model="issue.comments"></textarea>
       </div>
-      <button ng-if="!user" class="btn btn-warning pull-right" ng-click="login()">Login to Submit</button>
-      <button ng-if="user" class="btn btn-primary pull-right" ng-click="submitIssue()">Submit Issue</button>
+      <button ng-if="!user" class="btn btn-warning pull-right" ng-click="login()">Login to {{updating ? 'Update' : 'Submit'}} Issue</button>
+      <button ng-if="user" class="btn btn-primary pull-right" ng-click="submitIssue()">{{updating ? 'Update' : 'Submit'}} Issue</button>
     </form>
     <div>
       <h2>Preview</h2>
@@ -64,9 +64,9 @@
       </div>
     </div>
   </div>
-  <div ng-show="issueUrl">
-    <div class="alert alert-success">Successfully created an issue: <a ng-href="{{issueUrl}}">{{issueUrl}}</a></div>
-    <div><a ng-click="issueUrl=''" class="cursor-pointer">Create New Issue</a></div>
+  <div ng-show="issueSubmitted">
+    <div class="alert alert-success">Successfully {{updating ? 'updated' : 'created an'}} issue: <a ng-href="{{issueUrl}}">{{issueUrl}}</a></div>
+    <div><a ng-click="resetIssue()" class="cursor-pointer">Create New Issue</a></div>
   </div>
   <div ng-show="!template">
     <h1>Uh oh...</h1>

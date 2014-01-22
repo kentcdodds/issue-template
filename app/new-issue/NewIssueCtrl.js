@@ -1,13 +1,23 @@
-angular.module('it').controller('NewIssueCtrl', function($scope, util, GitHubService, LoginService, fields, template, _, toastr) {
+angular.module('it').controller('NewIssueCtrl', function($scope, util, GitHubService, LoginService, fields, template, _, toastr, issue) {
   $scope.template = template;
+  $scope.updating = !!issue;
 
   $scope.resetIssue = function() {
+    if ($scope.issueSubmitted) {
+      issue = null;
+      $scope.issueSubmitted = false;
+    }
     $scope.issue = {
       title: '',
       comments: '',
       fields: fields
     };
     $scope.issueUrl = '';
+    if (issue && issue.data) {
+      $scope.issueUrl = issue.data['html_url'];
+      $scope.issue.title = issue.data.title;
+      $scope.issue.comments = issue.data.body;
+    }
   };
 
   $scope.resetIssue();
@@ -18,6 +28,7 @@ angular.module('it').controller('NewIssueCtrl', function($scope, util, GitHubSer
         field.enteredValue = field.value.split(',')[0];
         break;
       case 'input':
+        //noinspection FallThroughInSwitchStatementJS
         switch (field.type) {
           case 'checkbox':
             field.selectedValues = [];
@@ -77,12 +88,22 @@ angular.module('it').controller('NewIssueCtrl', function($scope, util, GitHubSer
   }, true);
 
   $scope.submitIssue = function() {
-    var project = $scope.template.owner + '/' + $scope.template.repo;
+    var owner = $scope.template.owner;
+    var repo = $scope.template.repo;
     var accessToken = $scope.user.accessToken;
-    GitHubService.submitIssue(generateIssue(), accessToken, project).success(function(data) {
+    function success(data) {
       $scope.issueUrl = data['html_url'];
-    }).error(function() {
+      $scope.issueSubmitted = true;
+    }
+
+    function error() {
       toastr.error('There was a problem submitting your issue... Please let us know...', 'Error...');
-    });
+    }
+
+    if (issue && issue.data) {
+      GitHubService.updateIssue(generateIssue(), accessToken, owner, repo, issue.data.number).success(success).error(error);
+    } else {
+      GitHubService.submitIssue(generateIssue(), accessToken, owner, repo).success(success).error(error);
+    }
   };
 });

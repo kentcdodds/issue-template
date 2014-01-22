@@ -29,10 +29,31 @@ angular.module('it').factory('GitHubService', function($q, $http, util) {
       return deferred.promise;
     },
 
-    submitIssue: function(issue, accessToken, project) {
+    submitIssue: function(issue, accessToken, owner, repo) {
       return $http({
         method: 'POST',
-        url: convertUrl('repos/{{project}}/issues', {project: project}),
+        url: convertUrl('repos/{{owner}}/{{repo}}/issues', {
+          owner: owner,
+          repo: repo
+        }),
+        params: {
+          access_token: accessToken
+        },
+        data: {
+          title: issue.title,
+          body: issue.body
+        }
+      });
+    },
+
+    updateIssue: function(issue, accessToken, owner, repo, number) {
+      return $http({
+        method: 'PATCH',
+        url: convertUrl('repos/{{owner}}/{{repo}}/issues/{{number}}', {
+          owner: owner,
+          repo: repo,
+          number: number
+        }),
         params: {
           access_token: accessToken
         },
