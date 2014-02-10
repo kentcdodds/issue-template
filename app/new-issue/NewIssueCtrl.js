@@ -33,7 +33,7 @@ angular.module('it').controller('NewIssueCtrl', function($scope, util, GitHubSer
           case 'checkbox':
             field.selectedValues = [];
           case 'radio':
-            field.enteredValue = field.value.split(',')[0];;
+            field.enteredValue = (field.value || '').split(',')[0];;
             break;
           default:
             field.enteredValue = field.value;

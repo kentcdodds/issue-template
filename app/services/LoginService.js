@@ -22,10 +22,10 @@ angular.module('it').factory('LoginService', function(Firebase, $firebaseSimpleL
       loginObj.$logout();
       broadcastStateChange();
     },
-    login: function(rememberMe) {
+    login: function() {
       loginObj.$login('github', {
         scope: 'user,repo',
-        rememberMe: rememberMe
+        rememberMe: true
       }).then(function(user) {
           broadcastStateChange(user);
         }, function(error) {

@@ -5,23 +5,48 @@
   <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css">
   <link rel="stylesheet" href="./app/vendor/toastr.min.css">
   <link rel="stylesheet" href="./app/styles.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.9/angular.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.12/angular.min.js"></script>
 </head>
-<body class="center-block" ng-controller="MainCtrl">
+<body ng-controller="MainCtrl">
   <a href="https://github.com/kentcdodds/issue-template" ga><img id="improve-me" src="./app/resources/improve.png" alt="Improve on GitHub"></a>
-  <h1>Issue Templates</h1>
-  <a href="https://github.com/kentcdodds/issue-template" ga>Help</a>
-  <div class="ng-cloak">
+  <div id="main-container" class="center-block">
+    <a href="#"><h1>Issue Templates</h1></a>
+    <h3 class="text-muted">Templates for GitHub Issues</h3>
+    <div class="share-social">
+      <iframe src="//ghbtns.com/github-btn.html?user=kentcdodds&repo=issue-template&type=watch&count=true" height="20" width="118" frameborder="0" scrolling="0" style="width:118px; height: 20px;" allowTransparency="true"></iframe>
+      <a href="//twitter.com/share" class="twitter-share-button" data-url="http://kent.doddsfamily.us/issue-template" data-via="kentcdodds" data-text="Templates for GitHub Issues" data-hashtags="issuetemplate" data-lang="en">Tweet</a>
+      <div class="g-plusone" data-size="medium" data-annotation="inline" data-width="200" data-href="http://kent.doddsfamily.us/issue-template"></div>
+    </div>
     <div class="ng-cloak">
-      <a href="#" ng-if="!user" ng-click="login()" ga>Login</a>
-      <span ng-if="user">
-        {{user.name}} | <a href="#" ng-click="logout()" ga>Logout</a><br />
-        <a href="#/new-template" ga>New Template</a><br />
-        <a href="#" ga>Search Templates</a><br />
-      </span>
+      <div class="ng-cloak">
+        <div ng-show="!user">
+          <a href="#" ng-click="login()" ga>Login</a> | <a href="https://github.com/kentcdodds/issue-template" ga>Help</a>
+        </div>
+        <span ng-show="user">
+          {{user.name}} | <a href="#" ng-click="logout()" ga>Logout</a><br />
+          <a href="#/new-template" ga>Create New Template</a> | <a href="https://github.com/kentcdodds/issue-template" ga>Help</a>
+        </span>
+      </div>
+    </div>
+    <div ng-view></div>
+  </div>
+  <div id="footer">
+    <hr />
+    <div class="container center-block">
+      <div>
+        Created with love by Kent C. Dodds
+        <div class="follow-social">
+          <iframe src="http://ghbtns.com/github-btn.html?user=kentcdodds&type=follow&count=true" height="20" width="168" frameborder="0" scrolling="0" style="width:168px; height: 20px;" allowTransparency="true"></iframe>
+          <a href="https://twitter.com/kentcdodds" class="twitter-follow-button" data-show-count="true" data-lang="en">Follow @kentcdodds</a>
+          <div class="g-follow" data-annotation="bubble" data-height="20" data-href="//plus.google.com/114245123507194646768" data-rel="author"></div>
+        </div>
+      </div>
+      <div>
+        <a href="http://www.firebase.com/" ga><img id="powered-by-firebase" src="./app/resources/firebase-logo.png" alt="Powered by Firebase"></a>
+      </div>
     </div>
   </div>
-  <div ng-view></div>
+
   <script src="https://cdn.firebase.com/v0/firebase.js"></script>
   <script src="https://cdn.firebase.com/libs/angularfire/0.6.0/angularfire.min.js"></script>
   <script src="https://cdn.firebase.com/js/simple-login/1.2.0/firebase-simple-login.js"></script>
@@ -43,6 +68,19 @@
   <script src="./app/services/TemplateService.js"></script>
   <script src="./app/services/GitHubService.js"></script>
   <script src="./app/search/SearchTemplatesCtrl.js"></script>
+
+  <!-- Twitter -->
+  <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+
+  <!-- Google+ -->
+  <script type="text/javascript">
+    (function() {
+      var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
+      po.src = 'https://apis.google.com/js/platform.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+    })();
+  </script>
+
   <script>
     //Google Analytics
     (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
