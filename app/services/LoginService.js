@@ -24,7 +24,7 @@ angular.module('it').factory('LoginService', function(Firebase, $firebaseSimpleL
     },
     login: function() {
       loginObj.$login('github', {
-        scope: 'user,repo',
+        scope: 'repo',
         rememberMe: true
       }).then(function(user) {
           broadcastStateChange(user);
