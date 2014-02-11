@@ -28,10 +28,10 @@ angular.module('it').factory('util', (function(markdown) {
       return util.htmlize(util.hideComments(input));
     },
     hideComments: function(input) {
-      return markdown.toHTML(input);
+      return input.replace(/<!--.*?-->/g, '');
     },
     htmlize: function(input) {
-      return input.replace(/<!--.*?-->/g, '');
+      return markdown.toHTML(input);
     }
   };
   return util;
