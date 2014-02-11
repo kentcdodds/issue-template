@@ -1,7 +1,7 @@
 angular.module('it').controller('NewIssueCtrl', function($scope, $sce, $filter, util, markdown, GitHubService, LoginService, fields, template, _, toastr, issue) {
   $scope.template = template;
   if ($scope.template.notes) {
-    $scope.templateNotes = $sce.trustAsHtml(hideCommentsAndHTMLize($scope.template.notes));
+    $scope.templateNotes = $sce.trustAsHtml(util.hideCommentsAndHTMLize($scope.template.notes));
   }
   $scope.updating = !!issue;
 
