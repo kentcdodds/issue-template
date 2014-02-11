@@ -30,9 +30,10 @@ body {
 .preview-area {
   background-color: #F4F4F4;
   padding: 10px;
+  min-height: 40px;
 }
 
-.created-alert {
+.margin-top-medium {
   margin-top: 20px;
 }
 
@@ -55,8 +56,12 @@ body {
   margin-left:20px;
 }
 
+.template-fields {
+  margin: 20px 0 20px 0;
+}
+
 #template-template {
-  height: 300px;
+  height: 150px;
 }
 
 .cursor-pointer {

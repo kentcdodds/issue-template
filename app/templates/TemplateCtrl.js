@@ -1,4 +1,4 @@
-angular.module('it').controller('TemplateCtrl', function($scope, $location, util, TemplateService, GitHubService, template, mode, $timeout, toastr) {
+angular.module('it').controller('TemplateCtrl', function($scope, $location, $sce, util, TemplateService, GitHubService, template, mode, $timeout, toastr) {
   $scope.template = template;
   $scope.mode = mode;
 
@@ -6,7 +6,9 @@ angular.module('it').controller('TemplateCtrl', function($scope, $location, util
     $scope.template.name = '';
   }
 
-  $scope.titlePlaceholder = 'ex. Feature: {{title}}';
+  $scope.defaultTitleTemplate = '{{title}}';
+
+  $scope.titlePlaceholder = 'ex. Feature: {{title}} (optional)';
 
   (function(preload) {
     if (!preload || $scope.template) {
@@ -106,6 +108,10 @@ angular.module('it').controller('TemplateCtrl', function($scope, $location, util
       ' Saving this template will overwrite that template.', $scope.template), 'Warning...');
   }
 
+  $scope.$watch('template.template', function(template) {
+    $scope.templatePreview = $sce.trustAsHtml(util.hideCommentsAndHTMLize(template));
+  });
+
   /*
    * Form controls
    */
@@ -134,6 +140,7 @@ angular.module('it').controller('TemplateCtrl', function($scope, $location, util
   $scope.submitTemplate = function() {
     if ($scope.isCollaborator) {
       $scope.template.createdBy = $scope.user.login;
+      $scope.template.titleTemplate = $scope.template.titleTemplate || '{{title}}';
       TemplateService.saveTemplate(JSON.parse(angular.toJson($scope.template)));
       $scope.templateUrl = util.simpleCompile('#/{{owner}}/{{repo}}/{{name}}', $scope.template);
     } else {

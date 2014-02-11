@@ -1,8 +1,16 @@
 <div>
-  <h2>{{template.owner}}/{{template.repo}} <small>{{template.name}} issue template</small></h2>
+  <h2><strong>{{template.name}}</strong> template for <strong>{{template.owner}}/{{template.repo}}</strong> issues</h2>
   <a ng-href="#/{{template.owner}}/{{template.repo}}/{{template.name}}/edit" ng-if="isCollaborator" class="btn btn-success edit-button">Edit Template</a>
   <div ng-show="!issueSubmitted && template">
-    <form role="form">
+    <div ng-if="templateNotes">
+      <h3>Notes:</h3>
+      <div ng-bind-html="templateNotes"></div>
+    </div>
+    <div>
+      <h3>Create Issue</h3>
+      <div class="text-muted">Fill out form below to create a GitHub issue for the project.</div>
+    </div>
+    <form role="form" class="margin-top-medium">
       <div class="form-group">
         <label for="issue-title">Issue Title</label>
         <input type="text" class="form-control" id="issue-title" ng-model="issue.title">
@@ -50,6 +58,7 @@
       <button ng-if="!user" class="btn btn-warning pull-right" ng-click="login()" ga>Login to {{updating ? 'Update' : 'Submit'}} Issue</button>
       <button ng-if="user" class="btn btn-primary pull-right" ng-click="submitIssue()" ga>{{updating ? 'Update' : 'Submit'}} Issue</button>
     </form>
+    <div class="clearfix"></div>
     <div>
       <h2>Preview</h2>
       <hr />
@@ -63,7 +72,7 @@
       </div>
     </div>
   </div>
-  <div ng-show="issueSubmitted" class="created-alert">
+  <div ng-show="issueSubmitted" class="margin-top-medium">
     <div class="alert alert-success">Successfully {{updating ? 'updated' : 'created an'}} issue: <a ng-href="{{issueUrl}}">{{issueUrl}}</a></div>
     <div><a ng-click="resetIssue()" class="cursor-pointer" ga>Create New Issue</a></div>
   </div>

@@ -1,6 +1,6 @@
-angular.module('it').constant('util', (function() {
+angular.module('it').factory('util', (function(markdown) {
 
-  return {
+  var util = {
     getDataSnapshot: function($q, service, serviceFn, fnArgs) {
       if (!angular.isArray(fnArgs)) {
         fnArgs = [fnArgs];
@@ -23,6 +23,16 @@ angular.module('it').constant('util', (function() {
           return match;
         }
       });
+    },
+    hideCommentsAndHTMLize: function(input) {
+      return util.htmlize(util.hideComments(input));
+    },
+    hideComments: function(input) {
+      return markdown.toHTML(input);
+    },
+    htmlize: function(input) {
+      return input.replace(/<!--.*?-->/g, '');
     }
-  }
-})());
+  };
+  return util;
+}));
