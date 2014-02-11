@@ -6,9 +6,9 @@ angular.module('it').controller('TemplateCtrl', function($scope, $location, $sce
     $scope.template.name = '';
   }
 
-  $scope.defaultTitleTemplate = '{{title}}';
-
-  $scope.titlePlaceholder = 'ex. Feature: {{title}} (optional)';
+  $scope.wrapInBraces = function(input) {
+    return '{{' + input + '}}';
+  };
 
   (function(preload) {
     if (!preload || $scope.template) {
