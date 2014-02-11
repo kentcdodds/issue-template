@@ -1,5 +1,7 @@
 # Issue Template
 
+![Issue Template logo](app/resources/github-issue-template-logo.png)
+
 A way for GitHub projects to make templates for GitHub issues.
 
 ## Brief Overview

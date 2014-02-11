@@ -10,21 +10,21 @@
 <body ng-controller="MainCtrl">
   <a href="https://github.com/kentcdodds/issue-template" ga><img id="improve-me" src="./app/resources/improve.png" alt="Improve on GitHub"></a>
   <div id="main-container" class="center-block">
-    <a href="#"><h1>Issue Templates</h1></a>
-    <h3 class="text-muted">Templates for GitHub Issues</h3>
     <div class="share-social">
       <iframe src="//ghbtns.com/github-btn.html?user=kentcdodds&repo=issue-template&type=watch&count=true" height="20" width="118" frameborder="0" scrolling="0" style="width:118px; height: 20px;" allowTransparency="true"></iframe>
       <a href="//twitter.com/share" class="twitter-share-button" data-url="http://issuetemplate.com" data-via="kentcdodds" data-text="Templates for GitHub Issues" data-hashtags="issuetemplate" data-lang="en">Tweet</a>
       <div class="g-plusone" data-size="medium" data-annotation="inline" data-width="200" data-href="http://issuetemplate.com"></div>
     </div>
+    <a href="#"><img src="app/resources/github-issue-template-logo.png"></a>
+    <h3 class="text-muted margin-top-small">Templates for GitHub Issues <small><a href="https://github.com/kentcdodds/issue-template">Learn more...</a></small></h3>
     <div class="ng-cloak">
       <div class="ng-cloak">
         <div ng-show="!user">
-          <a href="#" ng-click="login()" ga>Login</a> | <a href="https://github.com/kentcdodds/issue-template" ga>Help</a>
+          <a href="#" ng-click="login()" ga>Login</a>
         </div>
         <span ng-show="user">
           {{user.name}} | <a href="#" ng-click="logout()" ga>Logout</a><br />
-          <a href="#/new-template" ga>Create New Template</a> | <a href="https://github.com/kentcdodds/issue-template" ga>Help</a>
+          <a href="#/new-template" ga>Create New Template</a>
         </span>
       </div>
     </div>
