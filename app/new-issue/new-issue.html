@@ -1,6 +1,11 @@
 <div>
-  <h2><strong>{{template.name}}</strong> template for <strong>{{template.owner}}/{{template.repo}}</strong> issues</h2>
-  <a ng-href="#/{{template.owner}}/{{template.repo}}/{{template.name}}/edit" ng-if="isCollaborator" class="btn btn-success edit-button">Edit Template</a>
+  <h2>
+    <strong>{{template.name}}</strong>
+    template for
+    <a ng-href="http://github.com/{{template.owner}}/{{template.repo}}"><strong>{{template.owner}}/{{template.repo}}</strong></a>
+    issues
+  </h2>
+  <a ng-href="#/{{template.owner}}/{{template.repo}}/{{template.name}}/edit" ng-if="isCollaborator" class="btn btn-success">Edit Template</a>
   <div ng-show="!issueSubmitted && template">
     <div ng-if="templateNotes">
       <h3>Notes:</h3>
