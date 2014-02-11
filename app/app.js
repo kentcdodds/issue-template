@@ -4,6 +4,7 @@
   app.constant('Firebase', Firebase);
   app.constant('_', _);
   app.constant('toastr', toastr);
+  app.constant('markdown', markdown);
 
   function getTeplateInfo($q, util, service, fn, $route) {
     var routeParams = $route.current.params;

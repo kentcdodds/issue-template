@@ -1,4 +1,4 @@
-angular.module('it').controller('NewIssueCtrl', function($scope, util, GitHubService, LoginService, fields, template, _, toastr, issue) {
+angular.module('it').controller('NewIssueCtrl', function($scope, $sce, $filter, util, markdown, GitHubService, LoginService, fields, template, _, toastr, issue) {
   $scope.template = template;
   $scope.updating = !!issue;
 
@@ -83,8 +83,13 @@ angular.module('it').controller('NewIssueCtrl', function($scope, util, GitHubSer
     }
   }
 
+  function hideCommentsAndHTMLize(input) {
+    return markdown.toHTML(input.replace(/<!--.*?-->/g, ''));
+  }
+
   $scope.$watch('issue', function() {
     $scope.preview = generateIssue();
+    $scope.preview.body = $sce.trustAsHtml(hideCommentsAndHTMLize($scope.preview.body));
   }, true);
 
   $scope.submitIssue = function() {

@@ -19,6 +19,23 @@ body {
   margin: 16px 0 16px 0;
 }
 
+.edit-button {
+  margin-bottom: 20px;
+}
+
+.preview-title * {
+  margin: 0;
+}
+
+.preview-area {
+  background-color: #F4F4F4;
+  padding: 10px;
+}
+
+.created-alert {
+  margin-top: 20px;
+}
+
 #footer {
   width:100%;
   text-align: center;

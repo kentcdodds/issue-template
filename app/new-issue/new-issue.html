@@ -1,6 +1,6 @@
 <div>
   <h2>{{template.owner}}/{{template.repo}} <small>{{template.name}} issue template</small></h2>
-  <a ng-href="#/{{template.owner}}/{{template.repo}}/{{template.name}}/edit" ng-if="isCollaborator" class="btn btn-success">Edit Template</a>
+  <a ng-href="#/{{template.owner}}/{{template.repo}}/{{template.name}}/edit" ng-if="isCollaborator" class="btn btn-success edit-button">Edit Template</a>
   <div ng-show="!issueSubmitted && template">
     <form role="form">
       <div class="form-group">
@@ -52,19 +52,18 @@
     </form>
     <div>
       <h2>Preview</h2>
+      <hr />
       <div>
         <h3>Title:</h3>
-        <div>
-          {{preview.title}}
-        </div>
+        <div class="preview-area preview-title">{{preview.title}}</div>
       </div>
       <div>
         <h3>Body:</h3>
-        <pre>{{preview.body}}</pre>
+        <div class="preview-area" ng-bind-html="preview.body"></div>
       </div>
     </div>
   </div>
-  <div ng-show="issueSubmitted">
+  <div ng-show="issueSubmitted" class="created-alert">
     <div class="alert alert-success">Successfully {{updating ? 'updated' : 'created an'}} issue: <a ng-href="{{issueUrl}}">{{issueUrl}}</a></div>
     <div><a ng-click="resetIssue()" class="cursor-pointer" ga>Create New Issue</a></div>
   </div>
