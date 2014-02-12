@@ -1,13 +1,18 @@
-angular.module('it').controller('NewIssueCtrl', function($scope, $sce, $filter, util, markdown, LoadingService, GitHubService, LoginService, fields, template, _, toastr, issue) {
+angular.module('it').controller('NewIssueCtrl', function($scope, $sce, $filter, util, markdown, LoadingService, GitHubService, LoginService, fields, template, _, toastr, issue, issueNumber) {
   if (!template) {
     LoadingService.loadingState(false);
     return;
   }
+  $scope.updating = !!issue;
+  $scope.issueNumber = issueNumber;
+  if ($scope.updating && issue.error) {
+    $scope.issueLoadingProblem = true;
+  }
+  
   $scope.template = template;
   if ($scope.template.notes) {
     $scope.templateNotes = $sce.trustAsHtml(util.hideCommentsAndHTMLize($scope.template.notes));
   }
-  $scope.updating = !!issue;
 
   $scope.resetIssue = function() {
     if ($scope.issueSubmitted) {

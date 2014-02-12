@@ -6,6 +6,16 @@
       <a ng-href="http://github.com/{{template.owner}}/{{template.repo}}"><strong>{{template.owner}}/{{template.repo}}</strong></a>
       issues
     </h2>
+    <div ng-show="issueLoadingProblem">
+      <div class="alert alert-danger">
+        <button type="button" class="close" ng-click="issueLoadingProblem=false" aria-hidden="true">&times;</button>
+        <strong>Uh oh...</strong> There was a problem loading issue number {{issueNumber}}.
+        <a ng-href="http://github.com/{{template.owner}}/{{template.repo}}/issues/{{issueNumber}}">Does it exist?</a>
+        If so, this is a bug.
+        Please <a href="https://github.com/kentcdodds/issue-template/issues/new">let us know.</a>
+        Will create a new issue instead.
+      </div>
+    </div>
     <a ng-href="#/{{template.owner}}/{{template.repo}}/{{template.name}}/edit" ng-if="isCollaborator" class="btn btn-success">Edit Template</a>
     <div ng-show="!issueSubmitted && template">
       <div ng-if="templateNotes">

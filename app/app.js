@@ -103,13 +103,20 @@
         resolve: {
           template: resolve.template,
           fields: resolve.fields,
-          issue: function(GitHubService, $route) {
+          issue: function($q, GitHubService, $route) {
             var routeParams = $route.current.params;
-            return GitHubService.getIssue({
+            var deferred = $q.defer();
+            GitHubService.getIssue({
               owner: routeParams.owner,
               repo: routeParams.repo,
               number: routeParams.number
-            });
+            }).success(deferred.resolve).error(function(err) {
+                deferred.resolve({error: err});
+              });
+            return deferred.promise;
+          },
+          issueNumber: function($route) {
+            return $route.current.params.number;
           }
         }
       })
