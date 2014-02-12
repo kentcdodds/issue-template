@@ -1,4 +1,8 @@
-angular.module('it').controller('NewIssueCtrl', function($scope, $sce, $filter, util, markdown, GitHubService, LoginService, fields, template, _, toastr, issue) {
+angular.module('it').controller('NewIssueCtrl', function($scope, $sce, $filter, util, markdown, LoadingService, GitHubService, LoginService, fields, template, _, toastr, issue) {
+  if (!template) {
+    LoadingService.loadingState(false);
+    return;
+  }
   $scope.template = template;
   if ($scope.template.notes) {
     $scope.templateNotes = $sce.trustAsHtml(util.hideCommentsAndHTMLize($scope.template.notes));
@@ -110,4 +114,5 @@ angular.module('it').controller('NewIssueCtrl', function($scope, $sce, $filter, 
       GitHubService.submitIssue(generateIssue(), accessToken, owner, repo).success(success).error(error);
     }
   };
+  LoadingService.loadingState(false);
 });

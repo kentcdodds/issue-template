@@ -14,6 +14,17 @@ body {
   max-width: 170px;
 }
 
+.login-button {
+  font-size: 20px;
+}
+
+#loading-spinner {
+  text-align: center;
+  margin-top: 50px;
+  margin-bottom: 50px;
+  font-size: 60px;
+}
+
 .share-social {
   text-align: center;
   margin: 16px 0 16px 0;

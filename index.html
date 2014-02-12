@@ -2,10 +2,11 @@
 <html ng-app="it">
 <head>
   <title>Issue Template</title>
-  <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css">
+  <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css">
+  <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css">
   <link rel="stylesheet" href="./app/vendor/toastr.min.css">
   <link rel="stylesheet" href="./app/styles.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.12/angular.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.12/angular.js"></script>
 </head>
 <body ng-controller="MainCtrl">
   <a href="https://github.com/kentcdodds/issue-template" ga><img id="improve-me" src="./app/resources/improve.png" alt="Improve on GitHub"></a>
@@ -20,7 +21,7 @@
     <div class="ng-cloak">
       <div class="ng-cloak">
         <div ng-show="!user">
-          <a href="#" ng-click="login()" ga>Login</a>
+          <button class="btn btn-default login-button" ng-click="login()" ga><i class="fa fa-github"></i> Login with GitHub</button>
         </div>
         <span ng-show="user">
           {{user.name}} | <a href="#" ng-click="logout()" ga>Logout</a><br />
@@ -28,7 +29,10 @@
         </span>
       </div>
     </div>
-    <div ng-view></div>
+    <div ng-view ng-hide="loading"></div>
+    <div ng-show="loading" id="loading-spinner">
+      <i class="fa fa-spinner fa-spin"></i>
+    </div>
   </div>
   <div id="footer">
     <hr />
@@ -63,11 +67,11 @@
   <script src="./app/helper/filters.js"></script>
   <script src="./app/main/MainCtrl.js"></script>
   <script src="./app/services/LoginService.js"></script>
-  <script src="./app/home/HomeCtrl.js"></script>
   <script src="./app/new-issue/NewIssueCtrl.js"></script>
   <script src="./app/templates/TemplateCtrl.js"></script>
   <script src="./app/services/TemplateService.js"></script>
   <script src="./app/services/GitHubService.js"></script>
+  <script src="./app/services/LoadingService.js"></script>
   <script src="./app/search/SearchTemplatesCtrl.js"></script>
 
   <!-- Twitter -->

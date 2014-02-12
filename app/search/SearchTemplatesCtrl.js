@@ -1,4 +1,4 @@
-angular.module('it').controller('SearchTemplatesCtrl', function($scope, _, owners, TemplateService) {
+angular.module('it').controller('SearchTemplatesCtrl', function($scope, _, owners, TemplateService, LoadingService) {
   // flatten templates
   var templateArray = [];
   _.each(owners, function(repos, owner) {
@@ -13,4 +13,5 @@ angular.module('it').controller('SearchTemplatesCtrl', function($scope, _, owner
     });
   });
   $scope.templates = templateArray;
+  LoadingService.loadingState(false);
 });

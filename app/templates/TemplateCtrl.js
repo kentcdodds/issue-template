@@ -1,4 +1,4 @@
-angular.module('it').controller('TemplateCtrl', function($scope, $location, $sce, util, TemplateService, GitHubService, template, mode, $timeout, toastr) {
+angular.module('it').controller('TemplateCtrl', function($scope, $location, $sce, util, LoadingService, TemplateService, GitHubService, template, mode, $timeout, toastr) {
   $scope.template = template;
   $scope.mode = mode;
 
@@ -147,5 +147,7 @@ angular.module('it').controller('TemplateCtrl', function($scope, $location, $sce
       showCollabWarning();
     }
   };
+
+  LoadingService.loadingState(false);
 
 });

@@ -1,88 +1,90 @@
 <div>
-  <h2>
-    <strong>{{template.name}}</strong>
-    template for
-    <a ng-href="http://github.com/{{template.owner}}/{{template.repo}}"><strong>{{template.owner}}/{{template.repo}}</strong></a>
-    issues
-  </h2>
-  <a ng-href="#/{{template.owner}}/{{template.repo}}/{{template.name}}/edit" ng-if="isCollaborator" class="btn btn-success">Edit Template</a>
-  <div ng-show="!issueSubmitted && template">
-    <div ng-if="templateNotes">
-      <h3>Notes:</h3>
-      <div ng-bind-html="templateNotes"></div>
-    </div>
-    <div>
-      <h3>Create Issue</h3>
-      <div class="text-muted">Fill out form below to create a GitHub issue for the project.</div>
-    </div>
-    <form role="form" class="margin-top-medium">
-      <div class="form-group">
-        <label for="issue-title">Issue Title</label>
-        <input type="text" class="form-control" id="issue-title" ng-model="issue.title">
+  <div ng-if="template">
+    <h2>
+      <strong>{{template.name}}</strong>
+      template for
+      <a ng-href="http://github.com/{{template.owner}}/{{template.repo}}"><strong>{{template.owner}}/{{template.repo}}</strong></a>
+      issues
+    </h2>
+    <a ng-href="#/{{template.owner}}/{{template.repo}}/{{template.name}}/edit" ng-if="isCollaborator" class="btn btn-success">Edit Template</a>
+    <div ng-show="!issueSubmitted && template">
+      <div ng-if="templateNotes">
+        <h3>Notes:</h3>
+        <div ng-bind-html="templateNotes"></div>
       </div>
-      <div ng-repeat="field in issue.fields">
+      <div>
+        <h3>Create Issue</h3>
+        <div class="text-muted">Fill out form below to create a GitHub issue for the project.</div>
+      </div>
+      <form role="form" class="margin-top-medium">
         <div class="form-group">
-          <label for="field-{{$index}}">{{field.name}}</label>
-          <div ng-switch on="field.element">
-            <div ng-switch-when="input">
-              <div ng-switch on="field.type">
-
-                <div ng-switch-when="radio">
-                  <div class="radio" ng-repeat="value in field.value | split">
-                    <label>
-                      <input type="radio" value="{{value}}" ng-model="field.enteredValue" name="radio-field-{{$parent.$index}}">
-                      {{value}}
-                    </label>
+          <label for="issue-title">Issue Title</label>
+          <input type="text" class="form-control" id="issue-title" ng-model="issue.title">
+        </div>
+        <div ng-repeat="field in issue.fields">
+          <div class="form-group">
+            <label for="field-{{$index}}">{{field.name}}</label>
+            <div ng-switch on="field.element">
+              <div ng-switch-when="input">
+                <div ng-switch on="field.type">
+  
+                  <div ng-switch-when="radio">
+                    <div class="radio" ng-repeat="value in field.value | split">
+                      <label>
+                        <input type="radio" value="{{value}}" ng-model="field.enteredValue" name="radio-field-{{$parent.$index}}">
+                        {{value}}
+                      </label>
+                    </div>
                   </div>
-                </div>
-
-                <div ng-switch-when="checkbox">
-                  <div class="checkbox" ng-repeat="value in field.value | split">
-                    <label>
-                      <input type="checkbox" ng-true-value="{{value}}" ng-model="field.selectedValues[$index]">
-                      {{value}}
-                    </label>
+  
+                  <div ng-switch-when="checkbox">
+                    <div class="checkbox" ng-repeat="value in field.value | split">
+                      <label>
+                        <input type="checkbox" ng-true-value="{{value}}" ng-model="field.selectedValues[$index]">
+                        {{value}}
+                      </label>
+                    </div>
                   </div>
+  
+                  <input ng-switch-default type="{{field.type}}" class="form-control" id="field-{{$index}}" ng-model="field.enteredValue">
                 </div>
-
-                <input ng-switch-default type="{{field.type}}" class="form-control" id="field-{{$index}}" ng-model="field.enteredValue">
               </div>
+  
+              <textarea ng-switch-when="textarea" class="form-control" id="field-{{$index}}" ng-model="field.enteredValue"></textarea>
+              <select ng-switch-when="select" class="form-field" id="field-{{$index}}" ng-model="field.enteredValue">
+                <option ng-repeat="value in field.value | split">{{value}}</option>
+              </select>
             </div>
-
-            <textarea ng-switch-when="textarea" class="form-control" id="field-{{$index}}" ng-model="field.enteredValue"></textarea>
-            <select ng-switch-when="select" class="form-field" id="field-{{$index}}" ng-model="field.enteredValue">
-              <option ng-repeat="value in field.value | split">{{value}}</option>
-            </select>
           </div>
         </div>
-      </div>
-      <div class="form-group">
-        <label for="issue-comments">Other Comments</label>
-        <textarea type="text" class="form-control" id="issue-comments" ng-model="issue.comments"></textarea>
-      </div>
-      <button ng-if="!user" class="btn btn-warning pull-right" ng-click="login()" ga>Login to {{updating ? 'Update' : 'Submit'}} Issue</button>
-      <button ng-if="user" class="btn btn-primary pull-right" ng-click="submitIssue()" ga>{{updating ? 'Update' : 'Submit'}} Issue</button>
-    </form>
-    <div class="clearfix"></div>
-    <div>
-      <h2>Preview</h2>
-      <hr />
+        <div class="form-group">
+          <label for="issue-comments">Other Comments</label>
+          <textarea type="text" class="form-control" id="issue-comments" ng-model="issue.comments"></textarea>
+        </div>
+        <button ng-if="!user" class="btn btn-warning pull-right" ng-click="login()" ga>Login to {{updating ? 'Update' : 'Submit'}} Issue</button>
+        <button ng-if="user" class="btn btn-primary pull-right" ng-click="submitIssue()" ga>{{updating ? 'Update' : 'Submit'}} Issue</button>
+      </form>
+      <div class="clearfix"></div>
       <div>
-        <h3>Title:</h3>
-        <div class="preview-area preview-title">{{preview.title}}</div>
-      </div>
-      <div>
-        <h3>Body:</h3>
-        <div class="preview-area" ng-bind-html="preview.body"></div>
+        <h2>Preview</h2>
+        <hr />
+        <div>
+          <h3>Title:</h3>
+          <div class="preview-area preview-title">{{preview.title}}</div>
+        </div>
+        <div>
+          <h3>Body:</h3>
+          <div class="preview-area" ng-bind-html="preview.body"></div>
+        </div>
       </div>
     </div>
+    <div ng-show="issueSubmitted" class="margin-top-medium">
+      <div class="alert alert-success">Successfully {{updating ? 'updated' : 'created an'}} issue: <a ng-href="{{issueUrl}}">{{issueUrl}}</a></div>
+      <div><a ng-click="resetIssue()" class="cursor-pointer" ga>Create New Issue</a></div>
+    </div>
   </div>
-  <div ng-show="issueSubmitted" class="margin-top-medium">
-    <div class="alert alert-success">Successfully {{updating ? 'updated' : 'created an'}} issue: <a ng-href="{{issueUrl}}">{{issueUrl}}</a></div>
-    <div><a ng-click="resetIssue()" class="cursor-pointer" ga>Create New Issue</a></div>
-  </div>
-  <div ng-show="!template">
+  <div ng-if="!template">
     <h1>Uh oh...</h1>
-    Looks like there's no template here. <a href="#/search">Search for templates</a>.
+    Looks like there's no template here. <a href="#">Search for templates</a>.
   </div>
 </div>

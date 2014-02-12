@@ -115,4 +115,10 @@
       })
       .otherwise('/');
   });
+  
+  app.run(function($rootScope, LoadingService) {
+    $rootScope.$on('$locationChangeStart', function (event, next, current) {
+      LoadingService.loadingState(true);
+    });
+  });
 })();
