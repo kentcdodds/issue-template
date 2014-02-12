@@ -94,6 +94,9 @@
           fields: resolve.fields,
           issue: function() {
             return null;
+          },
+          issueNumber: function() {
+            return null;
           }
         }
       })
