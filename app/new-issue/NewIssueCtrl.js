@@ -25,10 +25,10 @@ angular.module('it').controller('NewIssueCtrl', function($scope, $sce, $filter, 
       fields: fields
     };
     $scope.issueUrl = '';
-    if (issue && issue.data) {
-      $scope.issueUrl = issue.data['html_url'];
-      $scope.issue.title = issue.data.title;
-      $scope.issue.comments = issue.data.body;
+    if (issue) {
+      $scope.issueUrl = issue['html_url'];
+      $scope.issue.title = issue.title;
+      $scope.issue.comments = issue.body;
     }
   };
 
@@ -113,8 +113,8 @@ angular.module('it').controller('NewIssueCtrl', function($scope, $sce, $filter, 
       toastr.error('There was a problem submitting your issue... Please let us know...', 'Error...');
     }
 
-    if (issue && issue.data) {
-      GitHubService.updateIssue(generateIssue(), accessToken, owner, repo, issue.data.number).success(success).error(error);
+    if (issue) {
+      GitHubService.updateIssue(generateIssue(), accessToken, owner, repo, issue.number).success(success).error(error);
     } else {
       GitHubService.submitIssue(generateIssue(), accessToken, owner, repo).success(success).error(error);
     }
