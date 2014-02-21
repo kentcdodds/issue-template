@@ -6,7 +6,7 @@
     </div>
     <div ng-hide="templateUrl">
       <h2>Create Template</h2>
-      <div class="text-muted">Use the form below to create a template</div>
+      <div class="text-muted">Use the form below to create a template (*denotes required field)</div>
       <div class="text-muted" ng-show="template.owner && template.repo && template.name">
         When saved, your template will be available at:
         <a class="display-block margin-left-small" href="#/{{template.owner + '/' + template.repo + '/' + template.name}}" ga>
@@ -16,15 +16,15 @@
 
       <form role="form" class="margin-top-medium">
       <div class="form-group">
-          <label for="owner">Owner</label>
+          <label for="owner">*Owner</label>
           <input type="text" class="form-control" id="owner" ng-disabled="mode === 'edit'" placeholder="ex. angular" ng-model="template.owner">
         </div>
         <div class="form-group">
-          <label for="name">Repo</label>
+          <label for="name">*Repo</label>
           <input type="text" class="form-control" id="name" ng-disabled="mode === 'edit'" placeholder="ex. angular.js" ng-model="template.repo">
         </div>
         <div class="form-group">
-          <label for="template-name">Template Name</label>
+          <label for="template-name">*Template Name</label>
           <input type="text" class="form-control" id="template-name" ng-disabled="mode === 'edit'" placeholder="ex. documentation" ng-model="template.name">
         </div>
         <div class="form-group">
@@ -38,7 +38,7 @@
             <button class="btn btn-danger" ng-click="removeField($index)">Remove Field</button>
             <div class="form-fields">
               <div class="form-group">
-                <label for="field-{{$index}}-name">Name</label>
+                <label for="field-{{$index}}-name">*Name</label>
                 <input type="text" class="form-control" id="field-{{$index}}-name" placeholder="ex. feature" ng-model="field.name">
               </div>
               <div class="form-group">
@@ -46,7 +46,7 @@
                 <input type="text" class="form-control" id="field-{{$index}}-help-text" placeholder="ex. what kind of feature is this?" ng-model="field.helpText">
               </div>
               <div class="form-group">
-                <label for="field-{{$index}}-element">Element</label>
+                <label for="field-{{$index}}-element">*Element</label>
                 <input type="text" class="form-control" id="field-{{$index}}-element" placeholder="ex. input/textarea/select/etc." ng-model="field.element">
               </div>
               <div class="form-group">
@@ -64,14 +64,14 @@
         </div>
         <div class="form-group">
           <label for="issue-title-template">Issue Title Template</label>
-          <input type="text" class="form-control" id="issue-title-template" placeholder="ex. Feature: {{wrapInBraces('title')}} (optional)" ng-model="template.titleTemplate">
+          <input type="text" class="form-control" id="issue-title-template" placeholder="ex. Feature: {{wrapInBraces('title')}}" ng-model="template.titleTemplate">
         </div>
         <div class="form-group">
-          <label for="template-template">Template... er... Template</label>
-          <textarea class="form-control" id="template-template" placeholder="ex. see README" ng-model="template.template"></textarea>
+          <label for="template-template">*Template... er... Template</label>
+          <textarea class="form-control" id="template-template" placeholder="ex. # Feature Request: {{wrapInBraces('field0')}}" ng-model="template.template"></textarea>
         </div>
         <div class="pull-right">
-          <button type="submit" class="btn btn-primary" ng-disabled="!isCollaborator" ng-click="submitTemplate()" ga>Submit</button>
+          <button type="submit" class="btn btn-primary" ng-disabled="!isCollaborator" ng-click="submitTemplate()" ga>{{mode === 'edit' ? 'Update' : 'Create'}}</button>
         </div>
       </form>
       <div class="clearfix"></div>
@@ -89,7 +89,7 @@
       </div>
     </div>
     <div ng-show="templateUrl">
-      <div class="alert alert-success margin-top-medium">Successfully created a template: <a ng-href="{{templateUrl}}" ga>{{templateUrl}}</a></div>
+      <div class="alert alert-success margin-top-medium">Successfully {{mode === 'edit' ? 'updated' : 'created'}} the template: <a ng-href="{{templateUrl}}" ga>{{templateUrl}}</a></div>
       <div><a ng-href="#/new-template" ng-click="templateUrl=''" class="cursor-pointer" ga>Create New Template</a></div>
       <div><a ng-href="{{templateUrl}}/edit" ng-click="templateUrl=''" ga>Edit Template</a></div>
     </div>

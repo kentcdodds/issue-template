@@ -10,47 +10,6 @@ angular.module('it').controller('TemplateCtrl', function($scope, $location, $sce
     return '{{' + input + '}}';
   };
 
-  (function(preload) {
-    if (!preload || $scope.template) {
-      return;
-    }
-    $scope.template = {
-      name: 'template0',
-      owner: 'kentcdodds',
-      repo: 'issue-template',
-      template: ['# Test Input: {{field0}}', '',
-        '## Test Select: {{field1}}', '',
-        'Test Radio: {{field2}}', '',
-        'Test Checkbox: {{field3}}'].join('\n'),
-      fields: [
-        {
-          name: 'Test Input',
-          element: 'input',
-          type: 'text',
-          value: 'Pre loaded value'
-        },
-        {
-          name: 'Test Select',
-          element: 'select',
-          type: 'empty',
-          value: 'option1,option2,option3'
-        },
-        {
-          name: 'Test Radio',
-          element: 'input',
-          type: 'radio',
-          value: 'option1,option2,option3'
-        },
-        {
-          name: 'Test Checkbox',
-          element: 'input',
-          type: 'checkbox',
-          value: 'option1,option2,option3'
-        }
-      ]
-    };
-  })(false);
-
   /*
    * Collaborator check logic
    */

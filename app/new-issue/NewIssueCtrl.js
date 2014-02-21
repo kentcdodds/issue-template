@@ -40,7 +40,7 @@ angular.module('it').controller('NewIssueCtrl', function($scope, $sce, $filter, 
   _.each($scope.issue.fields, function(field) {
     switch (field.element) {
       case 'select':
-        field.enteredValue = field.value.split(',')[0];
+        field.enteredValue = '';
         break;
       case 'input':
         //noinspection FallThroughInSwitchStatementJS
@@ -48,7 +48,7 @@ angular.module('it').controller('NewIssueCtrl', function($scope, $sce, $filter, 
           case 'checkbox':
             field.selectedValues = [];
           case 'radio':
-            field.enteredValue = (field.value || '').split(',')[0];;
+            field.enteredValue = (field.value || '').split(',')[0];
             break;
           default:
             field.enteredValue = field.value;
@@ -87,6 +87,7 @@ angular.module('it').controller('NewIssueCtrl', function($scope, $sce, $filter, 
           field.enteredValue = _.compact(field.selectedValues).join(', ');
           break;
       }
+      field.enteredValue = field.enteredValue || '';
     });
     return util.simpleCompile(string, cleanedFields, /{{field(\d)}}/g, 'enteredValue');
   }

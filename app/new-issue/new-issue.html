@@ -37,7 +37,7 @@
         <div ng-repeat="field in issue.fields">
           <div class="form-group">
             <label for="field-{{$index}}">{{field.name}}</label>
-            <small class="text-muted">{{field.helpText}}</small>
+            <small class="text-muted display-block">{{field.helpText}}</small>
             <div ng-switch on="field.element">
               <div ng-switch-when="input">
                 <div ng-switch on="field.type">
@@ -66,6 +66,7 @@
   
               <textarea ng-switch-when="textarea" class="form-control" id="field-{{$index}}" ng-model="field.enteredValue"></textarea>
               <select ng-switch-when="select" class="form-field" id="field-{{$index}}" ng-model="field.enteredValue">
+                <option selected></option>
                 <option ng-repeat="value in field.value | split">{{value}}</option>
               </select>
             </div>
