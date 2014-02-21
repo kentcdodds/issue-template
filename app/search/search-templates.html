@@ -22,10 +22,12 @@
     </div>
     <div ng-show="owner && !repo">
       It looks like <a ng-href="http://github.com/{{owner}}" ga>{{owner}}</a> has not created any templates.
+      See all templates <a href="#/" ga>here</a>.
     </div>
     <div ng-show="repo">
       It looks like there are no templates for the <a ng-href="http://github.com/{{owner}}/{{repo}}" ga>{{owner + '/' + repo}}</a> repo...
       Why don't you <a ng-href="http://github.com/{{owner}}/{{repo}}/issues/new" ga>invite them to make one</a>?
+      See more templates from the {{repo}} owner <a href="#/{{owner}}" ga>here</a>.
     </div>
   </div>
 </div>
