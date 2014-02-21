@@ -7,6 +7,12 @@
     <div ng-hide="templateUrl">
       <h2>Create Template</h2>
       <div class="text-muted">Use the form below to create a template</div>
+      <div class="text-muted" ng-show="template.owner && template.repo && template.name">
+        When saved, your template will be available at:
+        <a class="display-block margin-left-small" href="#/{{template.owner + '/' + template.repo + '/' + template.name}}" ga>
+          http://issuetemplate.com/#/{{template.owner + '/' + template.repo + '/' + template.name}}
+        </a>
+      </div>
 
       <form role="form" class="margin-top-medium">
       <div class="form-group">
@@ -34,6 +40,10 @@
               <div class="form-group">
                 <label for="field-{{$index}}-name">Name</label>
                 <input type="text" class="form-control" id="field-{{$index}}-name" placeholder="ex. feature" ng-model="field.name">
+              </div>
+              <div class="form-group">
+                <label for="field-{{$index}}-help-text">Help Text</label>
+                <input type="text" class="form-control" id="field-{{$index}}-help-text" placeholder="ex. what kind of feature is this?" ng-model="field.helpText">
               </div>
               <div class="form-group">
                 <label for="field-{{$index}}-element">Element</label>

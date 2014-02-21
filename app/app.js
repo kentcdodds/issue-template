@@ -24,6 +24,39 @@
     },
     allTemplates: function($q, util, TemplateService) {
       return util.getDataSnapshot($q, TemplateService, TemplateService.getAllTemplates);
+    },
+    ownerTemplates: function($q, util, TemplateService, $route) {
+      var deferred = $q.defer();
+      var params = $route.current.params;
+      util.getDataSnapshot($q, TemplateService, TemplateService.getOwnerTemplates, $route.current.params).then(function(data) {
+        var owner = {};
+        owner[params.owner] = {};
+        _.each(data, function(repo, name) {
+          owner[params.owner][name] = repo;
+        });
+        deferred.resolve(owner);
+      }, function(err) {
+        toastr.error('There was a problem loading the templates for this repo... Sorry!');
+        deferred.reject(err);
+      });
+      return deferred.promise;
+    },
+    repoTemplates: function($q, util, TemplateService, $route, _, toastr) {
+      var deferred = $q.defer();
+      var params = $route.current.params;
+      util.getDataSnapshot($q, TemplateService, TemplateService.getRepoTemplates, $route.current.params).then(function(data) {
+        var ownerRepo = {};
+        ownerRepo[params.owner] = {};
+        ownerRepo[params.owner][params.repo] = {};
+        _.each(data, function(template, name) {
+          ownerRepo[params.owner][params.repo][name] = template;
+        });
+        deferred.resolve(ownerRepo);
+      }, function(err) {
+        toastr.error('There was a problem loading the templates for this repo... Sorry!');
+        deferred.reject(err);
+      });
+      return deferred.promise;
     }
   };
 
@@ -74,6 +107,20 @@
               return 'new';
             }
           }
+        }
+      })
+      .when('/:owner', {
+        templateUrl: './app/search/search-templates.html',
+        controller: 'SearchTemplatesCtrl',
+        resolve: {
+          owners: resolve.ownerTemplates
+        }
+      })
+      .when('/:owner/:repo', {
+        templateUrl: './app/search/search-templates.html',
+        controller: 'SearchTemplatesCtrl',
+        resolve: {
+          owners: resolve.repoTemplates
         }
       })
       .when('/:owner/:repo/:name/edit', {

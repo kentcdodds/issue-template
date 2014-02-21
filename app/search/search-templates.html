@@ -1,8 +1,31 @@
 <div>
-  <h3>Search GitHub Projects <small>with issue templates</small></h3>
-  <input type="search" class="form-control" autofocus ng-model="search">
-  <hr />
-  <div ng-repeat="template in templates | filter:search">
-    <a ng-href="#/{{template.owner}}/{{template.repo}}/{{template.name}}" ga>{{template.owner}}/{{template.repo}}/{{template.name}}</a>
+  <div ng-show="templates.length > 0">
+    <h3>Search GitHub Projects <small>with issue templates</small></h3>
+    <div class="margin-bottom-medium">
+      <div class="text-muted" ng-show="owner && !repo">
+        See all templates <a href="#/" ga>here</a>.
+      </div>
+      <div class="text-muted" ng-show="repo">
+        See more templates from this repo owner <a href="#/{{owner}}" ga>here</a>.
+      </div>
+    </div>
+    <input type="search" class="form-control" autofocus ng-model="search">
+    <hr />
+    <div ng-repeat="template in templates | filter:search">
+      <a ng-href="#/{{template.owner}}/{{template.repo}}/{{template.name}}" ga>{{template.owner}}/{{template.repo}}/{{template.name}}</a>
+    </div>
+  </div>
+  <div ng-show="templates.length < 1">
+    <h3>No templates here :-(</h3>
+    <div ng-show="!owner">
+      Looks like nobody has setup any templates. Why don't you try it for one of your projects? <a href="./new-template" ga>Create a template</a>.
+    </div>
+    <div ng-show="owner && !repo">
+      It looks like <a ng-href="http://github.com/{{owner}}" ga>{{owner}}</a> has not created any templates.
+    </div>
+    <div ng-show="repo">
+      It looks like there are no templates for the <a ng-href="http://github.com/{{owner}}/{{repo}}" ga>{{owner + '/' + repo}}</a> repo...
+      Why don't you <a ng-href="http://github.com/{{owner}}/{{repo}}/issues/new" ga>invite them to make one</a>?
+    </div>
   </div>
 </div>

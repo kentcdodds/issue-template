@@ -6,6 +6,9 @@
       <a ng-href="http://github.com/{{template.owner}}/{{template.repo}}"><strong>{{template.owner}}/{{template.repo}}</strong></a>
       issues
     </h2>
+    <div class="text-muted">
+      See more issue templates for this repo <a href="#/{{template.owner}}/{{template.repo}}" ga>here</a>.
+    </div>
     <div ng-show="issueLoadingProblem">
       <div class="alert alert-danger">
         <button type="button" class="close" ng-click="issueLoadingProblem=false" aria-hidden="true">&times;</button>
@@ -34,6 +37,7 @@
         <div ng-repeat="field in issue.fields">
           <div class="form-group">
             <label for="field-{{$index}}">{{field.name}}</label>
+            <small class="text-muted">{{field.helpText}}</small>
             <div ng-switch on="field.element">
               <div ng-switch-when="input">
                 <div ng-switch on="field.type">
@@ -94,7 +98,16 @@
     </div>
   </div>
   <div ng-if="!template">
-    <h1>Uh oh...</h1>
-    Looks like there's no template here. <a href="#">Search for templates</a> or <a href="#/new-template">create a new template</a>.
+    <h1>Uh oh... :-(</h1>
+    Looks like there's no template for <a ng-href="http://github.com/{{owner}}/{{repo}}">{{owner}}/{{repo}}</a> called {{name}} here.
+    <strong class="display-block">What to do now?</strong>
+    <ul>
+      <li><a ng-href="http://github.com/{{owner}}/{{repo}}/issues/new" ga>Let them know</a></li>
+      <li><a ng-href="#/{{owner}}/{{repo}}" ga>Find other templates for this repo</a></li>
+      <li><a ng-href="#/{{owner}}" ga>Find templates for other repos owned by this owner</a></li>
+      <li><a href="#" ga>Search for all templates</a></li>
+      <li><a href="#/new-template" ga>Create a new template yourself</a></li>
+    </ul>
+
   </div>
 </div>

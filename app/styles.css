@@ -48,6 +48,18 @@ body {
   margin-top: 10px;
 }
 
+.margin-bottom-medium {
+  margin-bottom: 20px;
+}
+
+.margin-left-small {
+  margin-left: 10px;
+}
+
+.display-block {
+  display: block;
+}
+
 #footer {
   width:100%;
   text-align: center;

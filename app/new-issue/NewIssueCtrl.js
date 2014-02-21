@@ -1,6 +1,9 @@
-angular.module('it').controller('NewIssueCtrl', function($scope, $sce, $filter, util, markdown, LoadingService, GitHubService, LoginService, fields, template, _, toastr, issue, issueNumber) {
+angular.module('it').controller('NewIssueCtrl', function($scope, $sce, $filter, util, markdown, LoadingService, GitHubService, LoginService, fields, template, _, toastr, issue, issueNumber, $routeParams) {
   if (!template) {
     LoadingService.loadingState(false);
+    $scope.owner = $routeParams.owner;
+    $scope.repo = $routeParams.repo;
+    $scope.name = $routeParams.name;
     return;
   }
   $scope.updating = !!issue;
