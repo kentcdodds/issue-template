@@ -65,7 +65,7 @@
               </div>
   
               <textarea ng-switch-when="textarea" class="form-control" id="field-{{$index}}" ng-model="field.enteredValue"></textarea>
-              <select ng-switch-when="select" class="form-field" id="field-{{$index}}" ng-model="field.enteredValue">
+              <select ng-switch-when="select" class="form-control" id="field-{{$index}}" ng-model="field.enteredValue">
                 <option selected></option>
                 <option ng-repeat="value in field.value | split">{{value}}</option>
               </select>
