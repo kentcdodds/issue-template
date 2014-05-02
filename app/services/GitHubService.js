@@ -11,7 +11,7 @@ angular.module('it').factory('GitHubService', function($q, $http, util) {
       });
     },
 
-    checkUserIsCollaborator: function(owner, repo, user) {
+    checkUserIsCollaborator: function(owner, repo, user, accessToken) {
       var deferred = $q.defer();
       var url = convertUrl('repos/{{owner}}/{{repo}}/collaborators/{{user}}', {
         owner: owner,
@@ -20,7 +20,10 @@ angular.module('it').factory('GitHubService', function($q, $http, util) {
       });
       $http({
         method: 'GET',
-        url: url
+        url: url,
+        params: {
+          access_token: accessToken
+        }
       }).success(function() {
         deferred.resolve(true);
       }).error(function() {
