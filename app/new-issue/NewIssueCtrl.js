@@ -61,7 +61,7 @@ angular.module('it').controller('NewIssueCtrl', function($scope, $sce, $filter, 
 
   $scope.$watch('template.owner && template.repo && user.login', function() {
     if ($scope.template.owner && $scope.template.repo && $scope.user && $scope.user.login) {
-      GitHubService.checkUserIsCollaborator($scope.template.owner, $scope.template.repo, $scope.user.login).then(function(isCollaborator) {
+      GitHubService.checkUserIsCollaborator($scope.template.owner, $scope.template.repo, $scope.user.login, $scope.user.accessToken).then(function(isCollaborator) {
         $scope.isCollaborator = isCollaborator;
       });
     }
