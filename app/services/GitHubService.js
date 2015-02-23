@@ -44,7 +44,8 @@ angular.module('it').factory('GitHubService', function($q, $http, util) {
         },
         data: {
           title: issue.title,
-          body: issue.body
+          body: issue.body,
+          milestone: issue.milestone
         }
       });
     },
@@ -65,6 +66,29 @@ angular.module('it').factory('GitHubService', function($q, $http, util) {
           body: issue.body
         }
       });
+    },
+
+    getRepositoryMilestones: function(accessToken, owner, repo) {
+      var deferred = $q.defer();
+      return $http({
+        method: 'GET',
+        url: convertUrl('repos/{{owner}}/{{repo}}/milestones', {
+          owner: owner,
+          repo: repo
+        }),
+        params: {
+          access_token: accessToken
+        },
+        data: {
+          state: 'open'
+        }
+      }).success(function(responseData) {
+        deferred.resolve(responseData.data);
+      }).error(function() {
+        deferred.reject();
+      });
+
+      return deferred.promise;
     }
   }
 });

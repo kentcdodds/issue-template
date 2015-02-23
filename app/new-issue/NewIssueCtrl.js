@@ -95,7 +95,8 @@ angular.module('it').controller('NewIssueCtrl', function($scope, $sce, $filter, 
   function generateIssue() {
     return {
       title: compileTemplate(compileTitle($scope.template.titleTemplate)),
-      body: getBody()
+      body: getBody(),
+      milestone: $scope.template.selectedMilestone
     }
   }
 
