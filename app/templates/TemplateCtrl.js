@@ -34,7 +34,7 @@ angular.module('it').controller('TemplateCtrl', function($scope, $location, $sce
     return $timeout(function() {
       checkIfUserIsCollaborator();
       if (mode !== 'edit') {
-        checkIfOverwrittingTemplate();
+        checkIfOverwritingTemplate();
       }
     }, 500, true);
   }
@@ -67,7 +67,7 @@ angular.module('it').controller('TemplateCtrl', function($scope, $location, $sce
   /*
    * Template overwrite logic
    */
-  function checkIfOverwrittingTemplate() {
+  function checkIfOverwritingTemplate() {
     if ($scope.template.owner && $scope.template.repo && $scope.template.name) {
       TemplateService.getTemplate($scope.template).once('value', function(template) {
         if (template.val()) {
