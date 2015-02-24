@@ -53,8 +53,8 @@ angular.module('it').controller('TemplateCtrl', function($scope, $location, $sce
   function getMilestones () {
     GitHubService.getRepositoryMilestones(
       $scope.user.accessToken, $scope.template.owner, $scope.template.repo).
-    then(function (responseData) {
-      $scope.milestones = responseData.data;
+    then(function (response) {
+      $scope.milestones = response.data;
     });
   };
 

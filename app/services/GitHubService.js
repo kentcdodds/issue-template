@@ -69,7 +69,6 @@ angular.module('it').factory('GitHubService', function($q, $http, util) {
     },
 
     getRepositoryMilestones: function(accessToken, owner, repo) {
-      var deferred = $q.defer();
       return $http({
         method: 'GET',
         url: convertUrl('repos/{{owner}}/{{repo}}/milestones', {
@@ -82,13 +81,7 @@ angular.module('it').factory('GitHubService', function($q, $http, util) {
         data: {
           state: 'open'
         }
-      }).success(function(responseData) {
-        deferred.resolve(responseData.data);
-      }).error(function() {
-        deferred.reject();
       });
-
-      return deferred.promise;
     }
   }
 });
