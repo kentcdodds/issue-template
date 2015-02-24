@@ -21,6 +21,11 @@ angular.module('it').controller('TemplateCtrl', function($scope, $location, $sce
         $scope.isCollaborator = isCollaborator;
         if (!isCollaborator) {
           showCollabWarning();
+        } else {
+          if ($scope.isCollaborator && $scope.template.owner !== '' && $scope.template.repo !== '') {
+            // if the user is a collaborator of a project, fetch the related milestones
+            getMilestones();
+          }
         }
       });
     } else {
@@ -43,20 +48,14 @@ angular.module('it').controller('TemplateCtrl', function($scope, $location, $sce
     timeout = checkTimeout();
   });
 
-  $scope.$watch('isCollaborator', function() {
-    if ($scope.isCollaborator && $scope.template.owner !== '' && $scope.template.repo !== '') {
-      // if the user is a collaborator of a project, fetch the related milestones
-      getMilestones();
-    }
-  });
-
   function getMilestones () {
-    GitHubService.getRepositoryMilestones(
-      $scope.user.accessToken, $scope.template.owner, $scope.template.repo).
-    then(function (response) {
+    var accessToken = $scope.user.accessToken;
+    var template = $scope.template;
+    var promise = GitHubService.getRepositoryMilestones(accessToken, template.owner, template.repo);
+    promise.then(function (response) {
       $scope.milestones = response.data;
     });
-  };
+  }
 
   function showCollabWarning() {
     toastr.warning('You are not a collaborator on ' + util.simpleCompile('{{owner}}/{{repo}}.' +
