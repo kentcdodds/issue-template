@@ -102,7 +102,8 @@ angular.module('it').controller('TemplateCtrl', function($scope, $location, $sce
       copy: true,
       owner: $scope.template.owner,
       repo: $scope.template.repo,
-      name: $scope.template.name
+      name: $scope.template.name,
+      labels: $scope.template.labels
     });
   };
 

@@ -25,6 +25,7 @@ angular.module('it').controller('NewIssueCtrl', function($scope, $sce, $filter, 
     $scope.issue = {
       title: '',
       comments: '',
+      labels: '',
       fields: fields
     };
     $scope.issueUrl = '';
@@ -73,6 +74,15 @@ angular.module('it').controller('NewIssueCtrl', function($scope, $sce, $filter, 
     return template + '\n\n' + $scope.issue.comments;
   }
 
+  function getLabels() {
+    if(!$scope.issue.labels | $scope.issue.labels.length == 0) {
+      // an empty string confuses github's API, we need to return an empty array
+      return [];
+    } else {
+      return $scope.issue.labels;
+    }
+  }
+
   function compileTitle(string) {
     return util.simpleCompile(string, {
       title: $scope.issue.title || ' '
@@ -96,6 +106,7 @@ angular.module('it').controller('NewIssueCtrl', function($scope, $sce, $filter, 
     return {
       title: compileTemplate(compileTitle($scope.template.titleTemplate)),
       body: getBody(),
+      labels: getLabels(),
       milestone: $scope.template.selectedMilestone
     }
   }

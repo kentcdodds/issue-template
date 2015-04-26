@@ -34,6 +34,10 @@
           <label for="issue-title">Issue Title</label>
           <input type="text" class="form-control" id="issue-title" ng-model="issue.title">
         </div>
+        <div ng-if="template.labels" class="form-group">        
+          <label for="issue-labels">Issue Labels (comma-separated)</label>
+          <input type="text" class="form-control" id="issue-labels" ng-list="," ng-model="issue.labels">
+        </div>
         <div ng-repeat="field in issue.fields">
           <div class="form-group">
             <label for="field-{{$index}}">{{field.name}}</label>
