@@ -32,7 +32,7 @@ angular.module('it').factory('GitHubService', function($q, $http, util) {
       return deferred.promise;
     },
 
-    submitIssue: function(issue, accessToken, owner, repo) {
+    submitIssue: function(issue, accessToken, owner, repo) {      
       return $http({
         method: 'POST',
         url: convertUrl('repos/{{owner}}/{{repo}}/issues', {
@@ -45,6 +45,7 @@ angular.module('it').factory('GitHubService', function($q, $http, util) {
         data: {
           title: issue.title,
           body: issue.body,
+          labels: issue.labels,
           milestone: issue.milestone
         }
       });

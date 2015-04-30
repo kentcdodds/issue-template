@@ -24,7 +24,7 @@ angular.module('it').factory('TemplateService', function($q, Firebase, util, _) 
   }
 
   var TemplateService = {
-    saveTemplate: function(template) {
+    saveTemplate: function(template) {            
       var owner = cleanOutboundReference(template.owner);
       var repo = cleanOutboundReference(template.repo);
       var name = cleanOutboundReference(template.name);

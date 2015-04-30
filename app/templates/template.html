@@ -31,6 +31,9 @@
           <label for="template-notes">Template Notes</label>
           <textarea class="form-control" id="template-notes" placeholder="ex. use this for documentation requests (optional, and markdown accepted)" ng-model="template.notes"></textarea>
         </div>
+        <div class="form-group">          
+          <input type="checkbox" id="template-submit-labels" ng-model="template.labels"><span class="margin-left-small">Issues created from this template can contain labels</span>
+        </div>
         <div class="form-group" ng-show="milestones">
           <label for="template-milestone">Template Milestone</label>
           <select id="template-milestones" class="form-control" ng-model="template.selectedMilestone" ng-options="item.number as item.title for item in milestones">
