@@ -16,8 +16,8 @@ angular.module('it').controller('TemplateCtrl', function($scope, $location, $sce
   $scope.isCollaborator = $scope.mode === 'new';
 
   function checkIfUserIsCollaborator() {
-    if ($scope.template.owner && $scope.template.repo && $scope.user && $scope.user.login) {
-      GitHubService.checkUserIsCollaborator($scope.template.owner, $scope.template.repo, $scope.user.login, $scope.user.accessToken).then(function (isCollaborator) {
+    if ($scope.template.owner && $scope.template.repo && $scope.user && $scope.user.username) {
+      GitHubService.checkUserIsCollaborator($scope.template.owner, $scope.template.repo, $scope.user.username, $scope.user.accessToken).then(function (isCollaborator) {
         $scope.isCollaborator = isCollaborator;
         if (!isCollaborator) {
           showCollabWarning();
