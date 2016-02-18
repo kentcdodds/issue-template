@@ -1,4 +1,6 @@
-# Issue Template
+# Issue Template (UNMAINTAINED)
+
+This is no longer maintained because GitHub [finally implemented](https://github.com/blog/2111-issue-and-pull-request-templates) a simple way to do issue and pull request templates.
 
 ![Issue Template logo](app/resources/github-issue-template-logo.png)
 
