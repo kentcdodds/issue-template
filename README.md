@@ -1,6 +1,9 @@
 # Issue Template (UNMAINTAINED)
 
-This is no longer maintained because GitHub [finally implemented](https://github.com/blog/2111-issue-and-pull-request-templates) a simple way to do issue and pull request templates.
+This is no longer maintained because GitHub finally implemented a simple way to do issue and pull request templates.
+
+- [Github Blog: Issue and Pull Request templates](https://github.com/blog/2111-issue-and-pull-request-templates)
+- [Issue and Pull Request Templates Generator](https://www.talater.com/open-source-templates/)
 
 ![Issue Template logo](app/resources/github-issue-template-logo.png)
 
