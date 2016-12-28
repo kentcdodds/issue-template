@@ -1,4 +1,9 @@
-# Issue Template
+# Issue Template (UNMAINTAINED)
+
+This is no longer maintained because GitHub finally implemented a simple way to do issue and pull request templates.
+
+- [Github Blog: Issue and Pull Request templates](https://github.com/blog/2111-issue-and-pull-request-templates)
+- [Issue and Pull Request Templates Generator](https://www.talater.com/open-source-templates/)
 
 ![Issue Template logo](app/resources/github-issue-template-logo.png)
 
@@ -10,7 +15,7 @@ This tool was originally created for the [AngularJS](http://github.com/angular/a
 
 ## Creating a Template
 
-Simply go to http://issuetemplate.com/#/new-template to begin. Fill out the form and submit the template.
+Simply go to http://kentcdodds.github.io/issue-template.com/#/new-template to begin. Fill out the form and submit the template.
 
 ### Form Details
 
