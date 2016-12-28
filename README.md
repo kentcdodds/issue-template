@@ -11,15 +11,15 @@ A way for GitHub projects to make templates for GitHub issues.
 
 ## Brief Overview
 
-This tool was originally created for the [AngularJS](http://github.com/angular/angular.js) project because at the time of this writing it has almost 1,000 open issues. Triaging that many issues can be extremely difficult. However, using an issue template makes it much easier to quickly get an idea of what the issue is referring to (and if you have an automated account like [Mary Poppins](https://github.com/mary-poppins) you can even automatically assign the issue and give it the proper labels). It's a huge win for both the issue reporter and the project maintainer(s).
+This tool was originally created for the [AngularJS](https://github.com/angular/angular.js) project because at the time of this writing it has almost 1,000 open issues. Triaging that many issues can be extremely difficult. However, using an issue template makes it much easier to quickly get an idea of what the issue is referring to (and if you have an automated account like [Mary Poppins](https://github.com/mary-poppins) you can even automatically assign the issue and give it the proper labels). It's a huge win for both the issue reporter and the project maintainer(s).
 
 ## Creating a Template
 
-Simply go to http://kentcdodds.github.io/issue-template.com/#/new-template to begin. Fill out the form and submit the template.
+Simply go to https://kentcdodds.github.io/issue-template.com/#/new-template to begin. Fill out the form and submit the template.
 
 ### Form Details
 
-I'll be making a template for feature requests for http://github.com/kentcdodds/genie as an example.
+I'll be making a template for feature requests for https://github.com/kentcdodds/genie as an example.
 
  - Owner: kentcdodds
  - Repo: genie
@@ -65,7 +65,7 @@ If you have an existing issue you wish to change to a form, you can have it pre-
  
 ## Questions & Issues
 
-Please don't hesitate to [submit an issue](http://github.com/kentcdodds/issue-template). (Note: I'm not using this project for this repo because it's not too difficult for me to triage issues :D)
+Please don't hesitate to [submit an issue](https://github.com/kentcdodds/issue-template). (Note: I'm not using this project for this repo because it's not too difficult for me to triage issues :D)
 
 ## License
 

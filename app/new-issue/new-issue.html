@@ -3,7 +3,7 @@
     <h2>
       <strong>{{template.name}}</strong>
       template for
-      <a ng-href="http://github.com/{{template.owner}}/{{template.repo}}"><strong>{{template.owner}}/{{template.repo}}</strong></a>
+      <a ng-href="https://github.com/{{template.owner}}/{{template.repo}}"><strong>{{template.owner}}/{{template.repo}}</strong></a>
       issues
     </h2>
     <div class="text-muted">
@@ -13,7 +13,7 @@
       <div class="alert alert-danger">
         <button type="button" class="close" ng-click="issueLoadingProblem=false" aria-hidden="true">&times;</button>
         <strong>Uh oh...</strong> There was a problem loading issue number {{issueNumber}}.
-        <a ng-href="http://github.com/{{template.owner}}/{{template.repo}}/issues/{{issueNumber}}">Does it exist?</a>
+        <a ng-href="https://github.com/{{template.owner}}/{{template.repo}}/issues/{{issueNumber}}">Does it exist?</a>
         If so, this is a bug.
         Please <a href="https://github.com/kentcdodds/issue-template/issues/new">let us know.</a>
         Will create a new issue instead.
@@ -104,10 +104,10 @@
   </div>
   <div ng-if="!template">
     <h1>Uh oh... :-(</h1>
-    Looks like there's no template for <a ng-href="http://github.com/{{owner}}/{{repo}}">{{owner}}/{{repo}}</a> called {{name}} here.
+    Looks like there's no template for <a ng-href="https://github.com/{{owner}}/{{repo}}">{{owner}}/{{repo}}</a> called {{name}} here.
     <strong class="display-block">What to do now?</strong>
     <ul>
-      <li><a ng-href="http://github.com/{{owner}}/{{repo}}/issues/new" ga>Let them know</a></li>
+      <li><a ng-href="https://github.com/{{owner}}/{{repo}}/issues/new" ga>Let them know</a></li>
       <li><a ng-href="#/{{owner}}/{{repo}}" ga>Find other templates for this repo</a></li>
       <li><a ng-href="#/{{owner}}" ga>Find templates for other repos owned by this owner</a></li>
       <li><a href="#" ga>Search for all templates</a></li>
