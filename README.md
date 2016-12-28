@@ -15,7 +15,7 @@ This tool was originally created for the [AngularJS](http://github.com/angular/a
 
 ## Creating a Template
 
-Simply go to http://issuetemplate.com/#/new-template to begin. Fill out the form and submit the template.
+Simply go to http://kentcdodds.github.io/issue-template.com/#/new-template to begin. Fill out the form and submit the template.
 
 ### Form Details
 
